@@ -485,7 +485,41 @@ function buildDept(DATA,pfx,groupFn,COL){
 
   /* ── TAB 2: Productivity เทียบบุคลากร ── */
   // Bubble scatter
-  const bubbleData=DATA.map(d=>({x:d.total,y:+(d.prod/1e6).toFixed(3),r:Math.max(8,d.r68/700000),name:d.name,group:d.group}));
+  const bubbleData=DATA.map(d=>({x:d.total,y:+(d.prod/1e6).toFixed(3),r:Math.max(10,d.r68/600000),name:d.name,group:d.group,rev:d.r68}));
+  function makeBubbleLabelPlugin(bArr,idStr){
+    return {
+      id: idStr,
+      afterDatasetsDraw(chart){
+        const {ctx,scales:{x,y}}=chart;
+        ctx.save();
+        ctx.textAlign='center';
+        ctx.fillStyle='#2d3748';
+        const meta=chart.getDatasetMeta(0);
+        meta.data.forEach((el,i)=>{
+          const b=bArr[i];
+          const px=x.getPixelForValue(b.x);
+          const py=y.getPixelForValue(b.y);
+          const r=el.options&&el.options.radius?el.options.radius:b.r;
+          // word-wrap: split ชื่อยาว เป็น 2 บรรทัด
+          const name=b.name;
+          const maxW=r*2+30;
+          ctx.font='bold 10px Sarabun,sans-serif';
+          // measure and split at space/ฯ if too wide
+          let lines=[name];
+          if(ctx.measureText(name).width>maxW){
+            // try split at mid
+            const mid=Math.ceil(name.length/2);
+            lines=[name.slice(0,mid),name.slice(mid)];
+          }
+          const topY=py-r-6-(lines.length-1)*12;
+          lines.forEach((ln,li)=>{
+            ctx.fillText(ln,px,topY+li*13);
+          });
+        });
+        ctx.restore();
+      }
+    };
+  }
   new Chart(document.getElementById(`${pfx}-scatter`),{
     type:'bubble',
     data:{datasets:[{
@@ -496,31 +530,17 @@ function buildDept(DATA,pfx,groupFn,COL){
       borderWidth:2
     }]},
     options:{responsive:true,maintainAspectRatio:false,
+      layout:{padding:{top:40}},
       scales:{
         x:{title:{display:true,text:'จำนวนบุคลากร (คน)',font:{family:'Sarabun',size:12}},ticks:{font:{family:'Sarabun'},stepSize:1},min:0},
         y:{title:{display:true,text:'Productivity (ล้านบาท/คน)',font:{family:'Sarabun',size:12}},ticks:{font:{family:'Sarabun'},callback:v=>v.toFixed(2)+'M'},min:0}
       },
       plugins:{
         legend:{display:false},
-        tooltip:{callbacks:{label:ctx=>{const b=bubbleData[ctx.dataIndex];return[b.name,'บุคลากร: '+b.x+' คน','Productivity: '+b.y.toFixed(2)+'M/คน','รายได้รวม: '+fmtM(DATA.find(d=>d.name===b.name).r68)];}}}
+        tooltip:{callbacks:{label:ctx=>{const b=bubbleData[ctx.dataIndex];return[b.name,'บุคลากร: '+b.x+' คน','Productivity: '+b.y.toFixed(2)+'M/คน','รายได้รวม: '+fmtM(b.rev)];}}}
       }
     },
-    plugins:[{
-      id:'bubbleLabel',
-      afterDatasetsDraw(chart){
-        const {ctx}=chart;
-        ctx.save();
-        ctx.font='bold 10px Sarabun,sans-serif';
-        ctx.textAlign='center';
-        ctx.fillStyle='#2d3748';
-        chart.getDatasetMeta(0).data.forEach((pt,i)=>{
-          const b=bubbleData[i];
-          const shortName=b.name.length>8?b.name.slice(0,7)+'…':b.name;
-          ctx.fillText(shortName,pt.x,pt.y-pt.options.radius-5);
-        });
-        ctx.restore();
-      }
-    }]
+    plugins:[makeBubbleLabelPlugin(bubbleData,'bl-'+pfx+'-sc')]
   });
 
   // Rank bars
@@ -542,18 +562,19 @@ function buildDept(DATA,pfx,groupFn,COL){
   new Chart(document.getElementById(`${pfx}-st-donut`),{type:'doughnut',data:{labels:staffTots.map(s=>s.label+' ('+s.val+')'),datasets:[{data:staffTots.map(s=>s.val),backgroundColor:staffTots.map(s=>s.col),borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{family:'Sarabun',size:11}}}}}});
 
   // Bubble staff vs prod (tab3 version — same style)
-  const bData2=sorted.map(d=>({x:d.total,y:+(d.prod/1e6).toFixed(3),r:Math.max(7,d.r68/700000),name:d.name,group:d.group}));
+  const bData2=sorted.map(d=>({x:d.total,y:+(d.prod/1e6).toFixed(3),r:Math.max(10,d.r68/600000),name:d.name,group:d.group,rev:d.r68}));
   new Chart(document.getElementById(`${pfx}-st-bubble`),{
     type:'bubble',
     data:{datasets:[{label:'รพ.',data:bData2,backgroundColor:bData2.map(b=>gcol(b.group)+'bb'),borderColor:bData2.map(b=>gcol(b.group)),borderWidth:2}]},
     options:{responsive:true,maintainAspectRatio:false,
+      layout:{padding:{top:40}},
       scales:{
         x:{title:{display:true,text:'บุคลากร (คน)',font:{family:'Sarabun',size:11}},ticks:{font:{family:'Sarabun'},stepSize:1},min:0},
         y:{title:{display:true,text:'Prod. (ล้านบาท/คน)',font:{family:'Sarabun',size:11}},ticks:{font:{family:'Sarabun'},callback:v=>v.toFixed(2)+'M'},min:0}
       },
       plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>{const b=bData2[ctx.dataIndex];return[b.name,'บุคลากร: '+b.x+' คน','Prod: '+b.y.toFixed(2)+'M/คน'];}}}}
     },
-    plugins:[{id:'lbl2',afterDatasetsDraw(chart){const{ctx}=chart;ctx.save();ctx.font='bold 10px Sarabun,sans-serif';ctx.textAlign='center';ctx.fillStyle='#2d3748';chart.getDatasetMeta(0).data.forEach((pt,i)=>{const b=bData2[i];const s=b.name.length>8?b.name.slice(0,7)+'…':b.name;ctx.fillText(s,pt.x,pt.y-pt.options.radius-5);});ctx.restore();}}]
+    plugins:[makeBubbleLabelPlugin(bData2,'bl-'+pfx+'-st')]
   });
 
   // Staff cards
