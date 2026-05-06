@@ -265,7 +265,7 @@ body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);dis
           <div class="kpi" style="--ac:#a5d6a7"><div class="lb">บุคลากรรวม</div><div class="vl">77</div><div class="sb2">แพทย์ไทย+จพ.+นวก.+ผู้ช่วย</div></div>
           <div class="kpi" style="--ac:#ffb38a"><div class="lb">รายได้รวม ปี 68</div><div class="vl">23.1M</div><div class="sb2">บาท</div></div>
           <div class="kpi" style="--ac:#f48fb1"><div class="lb">Productivity เฉลี่ย</div><div class="vl">0.30M</div><div class="sb2">บาท/คน/ปี</div></div>
-          <div class="kpi" style="--ac:#b39ddb"><div class="lb">แพทย์แผนไทย</div><div class="vl">20</div><div class="sb2">26% ของบุคลากร</div></div>
+          <div class="kpi" style="--ac:#b39ddb"><div class="lb">แพทย์แผนไทย</div><div class="vl">17</div><div class="sb2">22% ของบุคลากร</div></div>
         </div>
         <div class="lr">
           <div class="li"><div class="ld" style="background:#6dd9c0"></div>สูง ≥ 0.5 ล้าน/คน/ปี</div>
@@ -316,10 +316,10 @@ body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);dis
       <div id="th-t3" class="tab-page">
         <div class="st">👥 วิเคราะห์อัตรากำลังบุคลากร</div>
         <div class="kpi-row">
-          <div class="kpi" style="--ac:#b39ddb"><div class="lb">แพทย์แผนไทย</div><div class="vl">20</div><div class="sb2">26% ของบุคลากรทั้งหมด</div></div>
-          <div class="kpi" style="--ac:#a5d6a7"><div class="lb">จพ.อายุรเวท</div><div class="vl">9</div><div class="sb2">11.7% — 5 รพ. มีตำแหน่งนี้</div></div>
-          <div class="kpi" style="--ac:#7eb8f7"><div class="lb">นักวิชาการ</div><div class="vl">3</div><div class="sb2">3.9% — มี 2 รพ.</div></div>
-          <div class="kpi" style="--ac:#ffb38a"><div class="lb">ผู้ช่วยแพทย์ไทย</div><div class="vl">45</div><div class="sb2">58.4% — สูงที่สุด</div></div>
+          <div class="kpi" style="--ac:#b39ddb"><div class="lb">แพทย์แผนไทย</div><div class="vl">17</div><div class="sb2">22% ของบุคลากรทั้งหมด</div></div>
+          <div class="kpi" style="--ac:#a5d6a7"><div class="lb">จพ.อายุรเวท</div><div class="vl">6</div><div class="sb2">7.8% — 4 รพ. มีตำแหน่งนี้</div></div>
+          <div class="kpi" style="--ac:#7eb8f7"><div class="lb">นักวิชาการ</div><div class="vl">2</div><div class="sb2">2.6% — มี 2 รพ.</div></div>
+          <div class="kpi" style="--ac:#ffb38a"><div class="lb">ผู้ช่วยแพทย์ไทย</div><div class="vl">52</div><div class="sb2">67.5% — สูงที่สุด</div></div>
         </div>
         <div class="cgrid">
           <div class="cc sthai"><h3>🧩 สัดส่วนบุคลากรตามตำแหน่ง</h3><div class="cw"><canvas id="th-st-donut"></canvas></div></div>
@@ -358,25 +358,27 @@ const PT=[
   {name:'หนองปรือ',         r65:2457800, r66:3918940, r67:3051630, r68:4304810, doc:2,jor:0,asst:2,nws:0,total:4},
 ];
 const THAI=[
-  {name:'ทองผาภูมิ',        r65:622078,  r66:1277307, r67:1153910, r68:1351689, doc:1,jor:1,nwk:0,asst:4,total:6},
-  {name:'สมเด็จฯ ส.๑๙',    r65:1581956, r66:1788357, r67:1382295, r68:1312276, doc:1,jor:0,nwk:0,asst:4,total:5},
-  {name:'บ่อพลอย',          r65:850796,  r66:1132354, r67:1824510, r68:3057082, doc:2,jor:0,nwk:0,asst:6,total:8},
-  {name:'เจ้าคุณไพบูลย์ฯ', r65:3158050, r66:3733230, r67:4293495, r68:4314379, doc:2,jor:1,nwk:0,asst:11,total:14},
-  {name:'ด่านมะขามเตี้ย',  r65:870038,  r66:1191679, r67:956778,  r68:978396,  doc:1,jor:0,nwk:0,asst:3,total:4},
-  {name:'ท่ากระดาน',        r65:287172,  r66:364543,  r67:450617,  r68:505050,  doc:2,jor:0,nwk:0,asst:1,total:3},
-  {name:'ไทรโยค',           r65:1379774, r66:1863361, r67:2982683, r68:5008355, doc:1,jor:2,nwk:0,asst:10,total:13},
-  {name:'เลาขวัญ',          r65:1034638, r66:1095539, r67:1224443, r68:1259493, doc:2,jor:0,nwk:0,asst:3,total:5},
-  {name:'สถานพระบารมี',     r65:231462,  r66:256989,  r67:590563,  r68:652554,  doc:1,jor:0,nwk:0,asst:1,total:2},
-  {name:'สมเด็จฯ ปิยฯ',    r65:269024,  r66:968212,  r67:1401558, r68:2409854, doc:1,jor:1,nwk:1,asst:3,total:6},
-  {name:'สังขละบุรี',       r65:358266,  r66:578800,  r67:464356,  r68:175575,  doc:1,jor:0,nwk:0,asst:1,total:2},
-  {name:'ห้วยกระเจาฯ',     r65:961920,  r66:1202811, r67:1347972, r68:1448670, doc:1,jor:1,nwk:1,asst:3,total:6},
-  {name:'ศุกร์ศิริฯ',      r65:1724143, r66:1528009, r67:1378481, r68:882279,  doc:0,jor:0,nwk:0,asst:1,total:1},
-  {name:'หนองปรือ',         r65:192276,  r66:433621,  r67:593800,  r68:643209,  doc:1,jor:0,nwk:0,asst:1,total:2},
+  // ข้อมูลจาก sheet แผนไทย (อัพเดท 6/6/68) บุคลากร = ปี 69
+  // doc=แพทย์แผนไทย, jor=จพ.อายุรเวท, nwk=นวก., asst=ผู้ช่วย
+  {name:'ทองผาภูมิ',              r65:622078,   r66:1277307,  r67:1153910,  r68:1351689,  doc:1,jor:1,nwk:0,asst:4,total:6},
+  {name:'สมเด็จฯ สังฆราช ๑๙',    r65:1581956,  r66:1788357,  r67:1382295,  r68:1312276,  doc:1,jor:0,nwk:0,asst:4,total:5},
+  {name:'บ่อพลอย',                r65:850796,   r66:1132354,  r67:1824510,  r68:3057082,  doc:2,jor:0,nwk:0,asst:6,total:8},
+  {name:'เจ้าคุณไพบูลย์พนมทวน',  r65:3158050,  r66:3733230,  r67:4293495,  r68:4314379,  doc:2,jor:1,nwk:0,asst:11,total:14},
+  {name:'ด่านมะขามเตี้ย',         r65:870038,   r66:1191679,  r67:956778,   r68:978396,   doc:1,jor:0,nwk:0,asst:3,total:4},
+  {name:'ท่ากระดาน',              r65:287172,   r66:364543,   r67:450617,   r68:505050,   doc:2,jor:0,nwk:0,asst:1,total:3},
+  {name:'ไทรโยค',                 r65:1379774,  r66:1863361,  r67:2982683,  r68:5008355,  doc:1,jor:2,nwk:0,asst:10,total:13},
+  {name:'เลาขวัญ',                r65:1034638,  r66:1095539,  r67:1224443,  r68:1259493,  doc:2,jor:0,nwk:0,asst:3,total:5},
+  {name:'สถานพระบารมี',           r65:231462,   r66:256989,   r67:590563,   r68:652554,   doc:1,jor:0,nwk:0,asst:1,total:2},
+  {name:'สมเด็จฯ ปิยมหาราชรมณียเขต', r65:269024, r66:968212, r67:1401558,  r68:2409854,  doc:1,jor:1,nwk:1,asst:3,total:6},
+  {name:'สังขละบุรี',             r65:358266,   r66:578800,   r67:464356,   r68:175575,   doc:1,jor:0,nwk:0,asst:1,total:2},
+  {name:'ห้วยกระเจาเฉลิมพระเกียรติ ๘๐ พรรษา', r65:961920, r66:1202811, r67:1347972, r68:1448670, doc:1,jor:1,nwk:1,asst:3,total:6},
+  {name:'ศุกร์ศิริศรีสวัสดิ์',   r65:1724143,  r66:1528009,  r67:1378481,  r68:882279,   doc:0,jor:0,nwk:0,asst:1,total:1},
+  {name:'หนองปรือ',               r65:192276,   r66:433621,   r67:593800,   r68:643209,   doc:1,jor:0,nwk:0,asst:1,total:2},
 ];
 
 /* ═══ HELPERS ═══ */
 const PAL=['#7eb8f7','#6dd9c0','#b39ddb','#ffb38a','#f48fb1','#80d8f7','#ffe082','#a5d6a7','#c5cae9','#fff59d','#ef9a9a','#ce93d8','#bcaaa4','#80cbc4'];
-const CLINE=['#7eb8f7','#6dd9c0','#b39ddb','#ffb38a','#f48fb1','#ffe082','#a5d6a7','#ce93d8'];
+// CLINE now global as CLINE_GLOBAL
 const fmtM=v=>(v/1e6).toFixed(2)+'M';
 const fmtK=v=>Math.round(v/1000).toLocaleString()+'K';
 const pct=(a,b)=>b>0?((a-b)/b*100).toFixed(1):'–';
@@ -421,11 +423,39 @@ window.addEventListener('load',()=>{
   buildDept(THAI,'thai',gThai, {main:'#b39ddb',dark:'#7c4dff',lt:'#d1c4e9',vlt:'#ede7f6'});
 });
 
+const CLINE_GLOBAL=['#7eb8f7','#6dd9c0','#b39ddb','#ffb38a','#f48fb1','#ffe082','#a5d6a7','#ce93d8'];
+const YEARS_GLOBAL=['2565','2566','2567','2568'];
+function _makeLineGroup(canvasId, items){
+  const el = document.getElementById(canvasId);
+  if(!el || items.length===0) return;
+  new Chart(el, {
+    type:'line',
+    data:{
+      labels: YEARS_GLOBAL,
+      datasets: items.map((d,i)=>({
+        label: d.name,
+        data: [d.r65,d.r66,d.r67,d.r68].map(v=>+(v/1e6).toFixed(2)),
+        borderColor: CLINE_GLOBAL[i%CLINE_GLOBAL.length],
+        backgroundColor:'transparent',
+        tension:0, pointRadius:5, borderWidth:2, fill:false
+      }))
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{labels:{font:{family:'Sarabun',size:10}}}},
+      scales:{
+        x:{ticks:{font:{family:'Sarabun',size:10}}},
+        y:{ticks:{font:{family:'Sarabun',size:10},callback:v=>v.toFixed(1)+'M'}}
+      }
+    }
+  });
+}
+
 function buildDept(DATA,pfx,groupFn,COL){
   DATA.forEach(d=>{d.prod=d.total>0?d.r68/d.total:0; d.group=groupFn(d.prod);});
   const sorted=[...DATA].sort((a,b)=>b.prod-a.prod);
   const maxP=sorted[0].prod;
-  const YEARS=['2565','2566','2567','2568'];
+  const YEARS=YEARS_GLOBAL; // use global
 
   /* ── TAB 0 ── */
   // Group grid
@@ -459,13 +489,10 @@ function buildDept(DATA,pfx,groupFn,COL){
   const lowG =DATA.filter(d=>d.group==='low');
   const midH=midG.slice(0,Math.ceil(midG.length/2));
   const midH2=midG.slice(Math.ceil(midG.length/2));
-  function makeLineGroup(canvasId,items){
-    new Chart(document.getElementById(canvasId),{type:'line',data:{labels:YEARS,datasets:items.map((d,i)=>({label:d.name,data:[d.r65,d.r66,d.r67,d.r68].map(v=>+(v/1e6).toFixed(2)),borderColor:CLINE[i%CLINE.length],backgroundColor:'transparent',tension:0,pointRadius:5,borderWidth:2,fill:false}))},options:baseOpts(v=>v.toFixed(1)+'M')});
-  }
-  makeLineGroup(`${pfx}-tr-high`,highG);
-  makeLineGroup(`${pfx}-tr-mid1`,midH);
-  makeLineGroup(`${pfx}-tr-mid2`,midH2);
-  makeLineGroup(`${pfx}-tr-low`,lowG);
+  _makeLineGroup(`${pfx}-tr-high`,highG);
+  _makeLineGroup(`${pfx}-tr-mid1`,midH);
+  _makeLineGroup(`${pfx}-tr-mid2`,midH2);
+  _makeLineGroup(`${pfx}-tr-low`,lowG);
 
   // All bar
   new Chart(document.getElementById(`${pfx}-tr-all`),{type:'bar',data:{labels:DATA.map(d=>d.name),datasets:[{label:'ปี65',data:DATA.map(d=>d.r65/1e6),backgroundColor:COL.vlt},{label:'ปี66',data:DATA.map(d=>d.r66/1e6),backgroundColor:COL.lt},{label:'ปี67',data:DATA.map(d=>d.r67/1e6),backgroundColor:COL.main},{label:'ปี68',data:DATA.map(d=>d.r68/1e6),backgroundColor:COL.dark}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{ticks:{font:{family:'Sarabun',size:9},maxRotation:50}},y:{ticks:{font:{family:'Sarabun'},callback:v=>v.toFixed(1)+'M'}}},plugins:{legend:{labels:{font:{family:'Sarabun',size:10}}}}}});
@@ -560,7 +587,7 @@ function buildDept(DATA,pfx,groupFn,COL){
   /* ── TAB 3: อัตรากำลัง ── */
   const staffTots=pfx==='pt'
     ?[{label:'นักกายภาพบำบัด',val:39,col:'#7eb8f7'},{label:'จพ.เวชกรรมฟื้นฟู',val:1,col:'#6dd9c0'},{label:'ผู้ช่วยเหลือผู้ป่วย',val:14,col:'#b39ddb'},{label:'นว.สาธารณสุข',val:3,col:'#ffb38a'}]
-    :[{label:'แพทย์แผนไทย',val:20,col:'#b39ddb'},{label:'จพ.อายุรเวท',val:9,col:'#6dd9c0'},{label:'นักวิชาการ',val:3,col:'#7eb8f7'},{label:'ผู้ช่วยแพทย์ไทย',val:45,col:'#ffb38a'}];
+    :[{label:'แพทย์แผนไทย',val:17,col:'#b39ddb'},{label:'จพ.อายุรเวท',val:6,col:'#6dd9c0'},{label:'นักวิชาการ',val:2,col:'#7eb8f7'},{label:'ผู้ช่วยแพทย์ไทย',val:52,col:'#ffb38a'}];
   new Chart(document.getElementById(`${pfx}-st-donut`),{type:'doughnut',data:{labels:staffTots.map(s=>s.label+' ('+s.val+')'),datasets:[{data:staffTots.map(s=>s.val),backgroundColor:staffTots.map(s=>s.col),borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{family:'Sarabun',size:11}}}}}});
 
   // Bubble staff vs prod (tab3 version — same style)
