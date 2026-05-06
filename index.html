@@ -451,6 +451,37 @@ function _makeLineGroup(canvasId, items){
   });
 }
 
+let _bubbleCounter=0;
+function makeBubbleLabelPlugin(bArr,idStr){
+  // unique id per chart instance to avoid Chart.js duplicate plugin error
+  const uid = idStr + '_' + (++_bubbleCounter);
+  return {
+    id: uid,
+    afterDatasetsDraw(chart){
+      const {ctx,scales:{x,y}}=chart;
+      ctx.save();
+      ctx.textAlign='center';
+      ctx.fillStyle='#2d3748';
+      chart.getDatasetMeta(0).data.forEach((el,i)=>{
+        const b=bArr[i];
+        const px=x.getPixelForValue(b.x);
+        const py=y.getPixelForValue(b.y);
+        const r=b.r;
+        ctx.font='bold 10px Sarabun,sans-serif';
+        const name=b.name;
+        let lines=[name];
+        if(ctx.measureText(name).width > r*2+20){
+          const mid=Math.ceil(name.length/2);
+          lines=[name.slice(0,mid), name.slice(mid)];
+        }
+        const topY=py-r-6-(lines.length-1)*12;
+        lines.forEach((ln,li)=>ctx.fillText(ln,px,topY+li*13));
+      });
+      ctx.restore();
+    }
+  };
+}
+
 function buildDept(DATA,pfx,groupFn,COL){
   DATA.forEach(d=>{d.prod=d.total>0?d.r68/d.total:0; d.group=groupFn(d.prod);});
   const sorted=[...DATA].sort((a,b)=>b.prod-a.prod);
@@ -515,40 +546,6 @@ function buildDept(DATA,pfx,groupFn,COL){
   /* ── TAB 2: Productivity เทียบบุคลากร ── */
   // Bubble scatter
   const bubbleData=DATA.map(d=>({x:d.total,y:+(d.prod/1e6).toFixed(3),r:Math.max(10,d.r68/600000),name:d.name,group:d.group,rev:d.r68}));
-  function makeBubbleLabelPlugin(bArr,idStr){
-    return {
-      id: idStr,
-      afterDatasetsDraw(chart){
-        const {ctx,scales:{x,y}}=chart;
-        ctx.save();
-        ctx.textAlign='center';
-        ctx.fillStyle='#2d3748';
-        const meta=chart.getDatasetMeta(0);
-        meta.data.forEach((el,i)=>{
-          const b=bArr[i];
-          const px=x.getPixelForValue(b.x);
-          const py=y.getPixelForValue(b.y);
-          const r=el.options&&el.options.radius?el.options.radius:b.r;
-          // word-wrap: split ชื่อยาว เป็น 2 บรรทัด
-          const name=b.name;
-          const maxW=r*2+30;
-          ctx.font='bold 10px Sarabun,sans-serif';
-          // measure and split at space/ฯ if too wide
-          let lines=[name];
-          if(ctx.measureText(name).width>maxW){
-            // try split at mid
-            const mid=Math.ceil(name.length/2);
-            lines=[name.slice(0,mid),name.slice(mid)];
-          }
-          const topY=py-r-6-(lines.length-1)*12;
-          lines.forEach((ln,li)=>{
-            ctx.fillText(ln,px,topY+li*13);
-          });
-        });
-        ctx.restore();
-      }
-    };
-  }
   new Chart(document.getElementById(`${pfx}-scatter`),{
     type:'bubble',
     data:{datasets:[{
