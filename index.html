@@ -385,10 +385,12 @@ const badge=g=>g==='high'?'<span class="badge bh">สูง</span>':g==='mid'?'<
 const trendH=(r67,r68)=>r68>r67?'<span style="color:#2e8b6e;font-weight:700">▲ เพิ่ม</span>':'<span style="color:#c0395c;font-weight:700">▼ ลด</span>';
 const baseOpts=(ycb)=>({responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{family:'Sarabun',size:11}}}},scales:{x:{ticks:{font:{family:'Sarabun',size:10}}},y:{ticks:{font:{family:'Sarabun',size:10},callback:ycb}}}});
 
+let _yoyCounter=0;
 function lineWithPctPlugin(totals,col){
-  /* Custom plugin to draw YoY % on line chart */
+  /* Custom plugin to draw YoY %  — unique id per chart to avoid duplicate registration */
+  const uid='yoyLabel_'+(++_yoyCounter);
   return {
-    id:'yoyLabel',
+    id: uid,
     afterDatasetsDraw(chart){
       const {ctx,data,scales:{x,y}}=chart;
       const vals=data.datasets[0].data;
@@ -447,7 +449,7 @@ function buildDept(DATA,pfx,groupFn,COL){
   new Chart(document.getElementById(`${pfx}-tr-total`),{
     type:'line',
     data:{labels:YEARS,datasets:[{label:'รายได้รวม (ล้านบาท)',data:totals,borderColor:COL.main,backgroundColor:'transparent',tension:0,pointRadius:7,pointBackgroundColor:COL.main,borderWidth:3,fill:false}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{family:'Sarabun',size:11}}},yoyLabel:{}},scales:{x:{ticks:{font:{family:'Sarabun',size:11}}},y:{ticks:{font:{family:'Sarabun'},callback:v=>v.toFixed(1)+'M'}}}},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{family:'Sarabun',size:11}}}},scales:{x:{ticks:{font:{family:'Sarabun',size:11}}},y:{ticks:{font:{family:'Sarabun'},callback:v=>v.toFixed(1)+'M'}}}},
     plugins:[lineWithPctPlugin(totals,COL.main)]
   });
 
