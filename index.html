@@ -7,84 +7,69 @@
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
-:root{--bg:#f0f4fb;--card:#fff;--border:#e2e8f3;--sidebar-w:224px;--text:#2d3748;--sub:#718096;}
+:root{--bg:#f0f4fb;--card:#fff;--border:#e2e8f3;--sw:224px;--text:#2d3748;--sub:#718096;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);display:flex;min-height:100vh;}
-
-.sidebar{width:var(--sidebar-w);flex-shrink:0;background:#fff;border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:100;}
-.sb-logo{padding:22px 18px 18px;background:linear-gradient(135deg,#7eb8f7,#b39ddb);color:#fff;}
+.sidebar{width:var(--sw);flex-shrink:0;background:#fff;border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;z-index:100;}
+.sb-logo{padding:20px 18px 16px;background:linear-gradient(135deg,#7eb8f7,#b39ddb);color:#fff;}
 .sb-logo h2{font-size:1rem;font-weight:800;line-height:1.45;}
 .sb-logo p{font-size:.7rem;opacity:.85;margin-top:3px;}
-.sb-section{padding:14px 18px 6px;font-size:.65rem;font-weight:800;color:var(--sub);text-transform:uppercase;letter-spacing:.08em;}
-.dept-btn{display:flex;align-items:center;gap:13px;padding:15px 18px;cursor:pointer;font-family:'Sarabun',sans-serif;font-size:.93rem;font-weight:700;color:var(--text);background:none;border:none;width:100%;text-align:left;border-left:4px solid transparent;transition:all .15s;}
+.sb-sec{padding:14px 18px 6px;font-size:.65rem;font-weight:800;color:var(--sub);text-transform:uppercase;letter-spacing:.08em;}
+.dept-btn{display:flex;align-items:center;gap:13px;padding:15px 18px;cursor:pointer;font-family:'Sarabun',sans-serif;font-size:.92rem;font-weight:700;color:var(--text);background:none;border:none;width:100%;text-align:left;border-left:4px solid transparent;transition:all .15s;}
 .dept-btn:hover{background:#f4f7ff;}
-.dept-btn.apt{background:#eef4ff;border-left-color:#7eb8f7;color:#1d6fd4;}
-.dept-btn.athai{background:#f5f0ff;border-left-color:#b39ddb;color:#6b48c4;}
-.di{font-size:1.5rem;line-height:1;}
-.dm{font-size:.93rem;font-weight:700;}
-.ds{font-size:.7rem;font-weight:400;color:var(--sub);margin-top:1px;}
-.dept-btn.apt .ds{color:#5a9adc;}
-.dept-btn.athai .ds{color:#9a7dc4;}
+.apt{background:#eef4ff;border-left-color:#7eb8f7;color:#1d6fd4;}
+.athai{background:#f5f0ff;border-left-color:#b39ddb;color:#6b48c4;}
+.di{font-size:1.5rem;}
+.dm{font-size:.92rem;font-weight:700;}
+.ds{font-size:.7rem;color:var(--sub);margin-top:1px;}
 .sb-foot{margin-top:auto;padding:12px 18px;font-size:.7rem;color:var(--sub);border-top:1px solid var(--border);}
-
-.main{margin-left:var(--sidebar-w);flex:1;display:flex;flex-direction:column;min-height:100vh;}
-.topbar{background:linear-gradient(135deg,#7eb8f7,#b39ddb);color:#fff;padding:16px 26px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:50;}
-.topbar h1{font-size:1.25rem;font-weight:800;}
-.topbar p{font-size:.78rem;opacity:.9;margin-top:2px;}
+.main{margin-left:var(--sw);flex:1;display:flex;flex-direction:column;}
+.topbar{background:linear-gradient(135deg,#7eb8f7,#b39ddb);color:#fff;padding:15px 26px;display:flex;align-items:center;justify-content:space-between;gap:10px;position:sticky;top:0;z-index:50;}
+.topbar h1{font-size:1.2rem;font-weight:800;}
+.topbar p{font-size:.77rem;opacity:.9;margin-top:2px;}
 .topbar-r{font-size:.72rem;opacity:.85;text-align:right;}
-
-.tab-bar{background:#fff;border-bottom:1px solid var(--border);padding:0 26px;display:flex;position:sticky;top:67px;z-index:40;}
-.tab-btn{padding:12px 18px;font-family:'Sarabun',sans-serif;font-size:.86rem;font-weight:700;color:var(--sub);background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;transition:all .15s;}
-.tab-btn:hover{color:var(--text);}
-.tab-btn.apt-a{color:#1d6fd4;border-bottom-color:#7eb8f7;}
-.tab-btn.athai-a{color:#6b48c4;border-bottom-color:#b39ddb;}
-
+.tabbar{background:#fff;border-bottom:1px solid var(--border);padding:0 26px;display:flex;position:sticky;top:64px;z-index:40;}
+.tbtn{padding:12px 17px;font-family:'Sarabun',sans-serif;font-size:.85rem;font-weight:700;color:var(--sub);background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;}
+.tbtn:hover{color:var(--text);}
+.tbtn.apt{color:#1d6fd4;border-bottom-color:#7eb8f7;}
+.tbtn.athai{color:#6b48c4;border-bottom-color:#b39ddb;}
 .content{padding:20px 26px;flex:1;}
-.dept-page{display:none;}
-.dept-page.active{display:block;}
-.tab-page{display:none;}
-.tab-page.active{display:block;}
-
+.dp{display:none;}.dp.on{display:block;}
+.tp{display:none;}.tp.on{display:block;}
 /* KPI */
-.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:13px;margin-bottom:20px;}
-.kpi{background:var(--card);border-radius:14px;padding:16px 18px;border:1px solid var(--border);position:relative;overflow:hidden;}
+.krow{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:13px;margin-bottom:18px;}
+.kpi{background:var(--card);border-radius:14px;padding:15px 17px;border:1px solid var(--border);position:relative;overflow:hidden;}
 .kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--ac,#7eb8f7);}
 .kpi .lb{font-size:.69rem;color:var(--sub);font-weight:700;text-transform:uppercase;letter-spacing:.04em;}
-.kpi .vl{font-size:1.9rem;font-weight:800;margin:5px 0 2px;line-height:1;}
-.kpi .sb2{font-size:.71rem;color:var(--sub);}
-
-/* CHART CONTAINERS */
+.kpi .vl{font-size:1.85rem;font-weight:800;margin:5px 0 2px;line-height:1;}
+.kpi .sb{font-size:.7rem;color:var(--sub);}
+/* Charts */
 .cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px;margin-bottom:18px;}
-.cgrid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:18px;}
 .cc{background:var(--card);border-radius:14px;border:1px solid var(--border);padding:16px 18px;}
 .cc h3{font-size:.86rem;font-weight:700;margin-bottom:12px;}
 .cw{position:relative;height:250px;}
 .cw2{position:relative;height:320px;}
-.cw3{position:relative;height:200px;}
 .cfu{background:var(--card);border-radius:14px;border:1px solid var(--border);padding:16px 18px;margin-bottom:18px;}
 .cfu h3{font-size:.86rem;font-weight:700;margin-bottom:12px;}
 .spt{border-top:4px solid #7eb8f7;}
 .sthai{border-top:4px solid #b39ddb;}
-
-/* RANK BARS */
-.rl{padding:4px 0;}
+/* Rank */
+.rl{padding:2px 0;}
 .rr{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
 .rlb{font-size:.78rem;font-weight:600;width:155px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .rbw{flex:1;background:#f0f4fb;border-radius:5px;height:23px;overflow:hidden;}
 .rb{height:100%;border-radius:5px;display:flex;align-items:center;justify-content:flex-end;padding-right:7px;}
 .rb span{font-size:.7rem;font-weight:800;color:#fff;}
 .rv{font-size:.77rem;font-weight:700;width:68px;text-align:right;flex-shrink:0;}
-
-/* BADGES */
+/* Badge */
 .badge{display:inline-block;padding:2px 9px;border-radius:10px;font-size:.7rem;font-weight:700;}
 .bh{background:#d4f5ed;color:#2e8b6e;}
 .bm{background:#fff3cd;color:#b07d00;}
 .bl{background:#fde8ef;color:#c0395c;}
-
-/* GROUP CARDS */
+/* Group cards */
 .ggrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px;margin-bottom:18px;}
 .gc{background:var(--card);border-radius:14px;border:1px solid var(--border);overflow:hidden;}
-.gh{padding:11px 16px;font-weight:800;font-size:.9rem;color:#fff;display:flex;align-items:center;gap:7px;}
+.gh{padding:11px 16px;font-weight:800;font-size:.9rem;color:#fff;}
 .ghi{background:linear-gradient(135deg,#6dd9c0,#4caf8e);}
 .gmi{background:linear-gradient(135deg,#ffe082,#f5c842);color:#6b4e00!important;}
 .gli{background:linear-gradient(135deg,#f48fb1,#e84d80);}
@@ -96,58 +81,48 @@ body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);dis
 .gv{font-size:1rem;font-weight:800;}
 .pg{background:#f0f4fb;border-radius:5px;height:5px;margin-top:3px;overflow:hidden;}
 .pf{height:100%;border-radius:5px;}
-
-/* TREND TOP/BOTTOM CARDS */
-.chg-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px;}
-.chg-card{background:var(--card);border-radius:14px;border:1px solid var(--border);overflow:hidden;}
-.chg-hd{padding:11px 16px;font-weight:800;font-size:.88rem;color:#fff;}
-.chg-hd.up{background:linear-gradient(135deg,#6dd9c0,#4caf8e);}
-.chg-hd.dn{background:linear-gradient(135deg,#f48fb1,#e84d80);}
-.chg-body{padding:8px 16px 12px;}
-.chg-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #f0f4fb;font-size:.84rem;}
-.chg-row:last-child{border-bottom:none;}
-.chg-name{font-weight:600;}
-.chg-val{font-weight:800;}
-.chg-val.up{color:#2e8b6e;}
-.chg-val.dn{color:#c0395c;}
-
-/* TABLE */
+/* Change cards */
+.chgg{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px;}
+.chgc{background:var(--card);border-radius:14px;border:1px solid var(--border);overflow:hidden;}
+.chgh{padding:11px 16px;font-weight:800;font-size:.88rem;color:#fff;}
+.chgh.up{background:linear-gradient(135deg,#6dd9c0,#4caf8e);}
+.chgh.dn{background:linear-gradient(135deg,#f48fb1,#e84d80);}
+.chgb{padding:8px 16px 12px;}
+.chgr{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #f0f4fb;font-size:.83rem;}
+.chgr:last-child{border-bottom:none;}
+.chgn{font-weight:600;}
+.cuv{font-weight:800;color:#2e8b6e;}
+.cdv{font-weight:800;color:#c0395c;}
+/* Table */
 .tw{background:var(--card);border-radius:14px;border:1px solid var(--border);overflow:auto;margin-bottom:18px;}
 .tw table{width:100%;border-collapse:collapse;min-width:760px;}
 .tw th{background:#f8faff;padding:9px 12px;font-size:.68rem;font-weight:700;color:var(--sub);text-align:left;border-bottom:1px solid var(--border);white-space:nowrap;}
 .tw td{padding:9px 12px;font-size:.84rem;border-bottom:1px solid #f0f4fb;}
 .tw tr:last-child td{border-bottom:none;}
 .tw tr:hover td{background:#f8faff;}
-
-/* STAFF CARDS */
-.staff-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:18px;}
-.staff-card{background:var(--card);border-radius:14px;border:1px solid var(--border);padding:15px 17px;position:relative;overflow:hidden;}
-.staff-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--ac,#7eb8f7);}
-.sc-name{font-size:.86rem;font-weight:700;margin-bottom:10px;}
-.srow{display:flex;justify-content:space-between;align-items:center;padding:3px 0;font-size:.8rem;}
-.srow .sl{color:var(--sub);}
-.srow .sv{font-weight:700;}
-
-/* INSIGHT */
+/* Staff */
+.sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:13px;margin-bottom:18px;}
+.sc{background:var(--card);border-radius:14px;border:1px solid var(--border);padding:14px 16px;position:relative;overflow:hidden;}
+.sc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--ac,#7eb8f7);}
+.scn{font-size:.85rem;font-weight:700;margin-bottom:9px;}
+.sr{display:flex;justify-content:space-between;padding:3px 0;font-size:.79rem;}
+.sl{color:var(--sub);}
+.sv{font-weight:700;}
+/* Insight */
 .ins{background:linear-gradient(135deg,#f0f4fb,#e8f4ff);border-radius:14px;border:1px solid #d0e4f7;padding:14px 18px;margin-bottom:18px;}
-.ins h3{font-size:.85rem;font-weight:700;margin-bottom:8px;color:#3b5a9a;}
-.ir{display:flex;gap:7px;align-items:flex-start;margin-bottom:5px;font-size:.82rem;}
-
-.st{font-size:1rem;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+.ins h3{font-size:.84rem;font-weight:700;margin-bottom:8px;color:#3b5a9a;}
+.ir{display:flex;gap:7px;margin-bottom:5px;font-size:.82rem;}
+.st{font-size:1rem;font-weight:800;margin-bottom:12px;}
 .lr{display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap;}
 .li{display:flex;align-items:center;gap:5px;font-size:.78rem;font-weight:600;}
 .ld{width:10px;height:10px;border-radius:50%;}
-
-/* DATALABELS inline plugin workaround via annotation */
-.chg-anno{font-size:.68rem;font-weight:700;}
 </style>
 </head>
 <body>
 
-<!-- SIDEBAR -->
 <nav class="sidebar">
   <div class="sb-logo"><h2>🏥 Productivity<br>Dashboard</h2><p>จ.กาญจนบุรี · ปี 65–68</p></div>
-  <div class="sb-section">เลือกแผนก</div>
+  <div class="sb-sec">เลือกแผนก</div>
   <button class="dept-btn apt" id="sbpt" onclick="switchDept('pt')">
     <div class="di">🦴</div><div><div class="dm">กายภาพบำบัด</div><div class="ds">Physical Therapy</div></div>
   </button>
@@ -157,34 +132,28 @@ body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);dis
   <div class="sb-foot">ข้อมูล ปี 2565–2568<br>อัพเดท พ.ค. 2568</div>
 </nav>
 
-<!-- MAIN -->
 <div class="main">
   <div class="topbar">
-    <div><h1 id="topTitle">🦴 กายภาพบำบัด — Productivity Dashboard</h1><p id="topSub">วิเคราะห์รายได้เทียบบุคลากร · 13 โรงพยาบาล จ.กาญจนบุรี</p></div>
+    <div><h1 id="ttl">🦴 กายภาพบำบัด — Productivity Dashboard</h1><p id="tsub">วิเคราะห์รายได้เทียบบุคลากร · 13 โรงพยาบาล จ.กาญจนบุรี</p></div>
     <div class="topbar-r">ข้อมูล 2565–2568<br>จ.กาญจนบุรี</div>
   </div>
-
-  <!-- TAB BAR  tab0=ภาพรวม | tab1=แนวโน้มรายได้ | tab2=Productivity เทียบจำนวนบุคลากร | tab3=อัตรากำลัง -->
-  <div class="tab-bar">
-    <button class="tab-btn apt-a" id="t0" onclick="switchTab(0)">🏠 ภาพรวม</button>
-    <button class="tab-btn" id="t1" onclick="switchTab(1)">📉 แนวโน้มรายได้รวมรายปี</button>
-    <button class="tab-btn" id="t2" onclick="switchTab(2)">📈 Productivity เทียบจำนวนบุคลากร</button>
-    <button class="tab-btn" id="t3" onclick="switchTab(3)">👥 วิเคราะห์อัตรากำลัง</button>
+  <div class="tabbar">
+    <button class="tbtn apt" id="t0" onclick="switchTab(0)">🏠 ภาพรวม</button>
+    <button class="tbtn" id="t1" onclick="switchTab(1)">📉 แนวโน้มรายได้รวมรายปี</button>
+    <button class="tbtn" id="t2" onclick="switchTab(2)">📈 Productivity เทียบจำนวนบุคลากร</button>
+    <button class="tbtn" id="t3" onclick="switchTab(3)">👥 วิเคราะห์อัตรากำลัง</button>
   </div>
-
   <div class="content">
 
-    <!-- ══ DEPT: กายภาพ ══ -->
-    <div id="dp-pt" class="dept-page active">
-
-      <!-- TAB 0: ภาพรวม -->
-      <div id="pt-t0" class="tab-page active">
-        <div class="kpi-row">
-          <div class="kpi" style="--ac:#7eb8f7"><div class="lb">รพ.ที่มีบริการ</div><div class="vl">13</div><div class="sb2">ไม่รวม ศุกร์ศิริฯ</div></div>
-          <div class="kpi" style="--ac:#6dd9c0"><div class="lb">บุคลากรรวม</div><div class="vl">57</div><div class="sb2">PT+จพ.+ผู้ช่วย+นว.สธ.</div></div>
-          <div class="kpi" style="--ac:#b39ddb"><div class="lb">รายได้รวม ปี 68</div><div class="vl">58.7M</div><div class="sb2">บาท</div></div>
-          <div class="kpi" style="--ac:#ffb38a"><div class="lb">Productivity เฉลี่ย</div><div class="vl">1.03M</div><div class="sb2">บาท/คน/ปี</div></div>
-          <div class="kpi" style="--ac:#f48fb1"><div class="lb">นักกายภาพ</div><div class="vl">39</div><div class="sb2">68.4% ของบุคลากร</div></div>
+    <!-- PT -->
+    <div id="dp-pt" class="dp on">
+      <div id="pt-t0" class="tp on">
+        <div class="krow">
+          <div class="kpi" style="--ac:#7eb8f7"><div class="lb">รพ.ที่มีบริการ</div><div class="vl">13</div><div class="sb">ไม่รวม ศุกร์ศิริฯ</div></div>
+          <div class="kpi" style="--ac:#6dd9c0"><div class="lb">บุคลากรรวม</div><div class="vl">57</div><div class="sb">PT+จพ.+ผู้ช่วย+นว.สธ.</div></div>
+          <div class="kpi" style="--ac:#b39ddb"><div class="lb">รายได้รวม ปี 68</div><div class="vl">58.7M</div><div class="sb">บาท</div></div>
+          <div class="kpi" style="--ac:#ffb38a"><div class="lb">Productivity เฉลี่ย</div><div class="vl">1.03M</div><div class="sb">บาท/คน/ปี</div></div>
+          <div class="kpi" style="--ac:#f48fb1"><div class="lb">นักกายภาพ</div><div class="vl">39</div><div class="sb">68.4% ของบุคลากร</div></div>
         </div>
         <div class="lr">
           <div class="li"><div class="ld" style="background:#6dd9c0"></div>สูง ≥ 1.2 ล้าน/คน/ปี</div>
@@ -194,78 +163,66 @@ body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);dis
         <div class="st">🏥 จัดกลุ่ม รพ. ตาม Productivity ปี 68</div>
         <div class="ggrid" id="pt-grp"></div>
         <div class="cgrid">
-          <div class="cc spt"><h3>🥧 สัดส่วนรายได้ ปี 68</h3><div class="cw"><canvas id="pt-ov-donut"></canvas></div></div>
-          <div class="cc spt"><h3>👥 จำนวนบุคลากรแต่ละ รพ.</h3><div class="cw"><canvas id="pt-ov-staff"></canvas></div></div>
+          <div class="cc spt"><h3>🥧 สัดส่วนรายได้ ปี 68</h3><div class="cw"><canvas id="pt-c-donut"></canvas></div></div>
+          <div class="cc spt"><h3>👥 จำนวนบุคลากรแต่ละ รพ.</h3><div class="cw"><canvas id="pt-c-staff"></canvas></div></div>
         </div>
-        <div class="ins">
-          <h3>💡 ข้อสังเกตสำคัญ</h3>
-          <div class="ir"><span>✅</span><span><b>บ่อพลอย</b> Productivity สูงสุด 1.42M/คน — 4 คน มี จพ.เวชกรรมฟื้นฟู เป็น Best Practice</span></div>
-          <div class="ir"><span>🌟</span><span><b>เจ้าคุณไพบูลย์ฯ, ด่านมะขามเตี้ย, ห้วยกระเจาฯ</b> — กลุ่มสูง อัตรากำลังเหมาะสม</span></div>
+        <div class="ins"><h3>💡 ข้อสังเกต</h3>
+          <div class="ir"><span>✅</span><span><b>บ่อพลอย</b> Productivity สูงสุด 1.42M/คน — มี จพ.เวชกรรมฟื้นฟู เป็น Best Practice</span></div>
           <div class="ir"><span>⚠️</span><span><b>ทองผาภูมิ</b> 6 คน แต่รายได้ตกต่อเนื่อง — Productivity ต่ำสุด 0.48M/คน</span></div>
-          <div class="ir"><span>🔴</span><span><b>ท่ากระดาน + สังขละบุรี</b> พื้นที่ห่างไกล ประชากรน้อย ควรวิเคราะห์ demand เพิ่ม</span></div>
+          <div class="ir"><span>🔴</span><span><b>ท่ากระดาน + สังขละบุรี</b> พื้นที่ห่างไกล ประชากรน้อย</span></div>
         </div>
       </div>
-
-      <!-- TAB 1: แนวโน้มรายได้รวมรายปี -->
-      <div id="pt-t1" class="tab-page">
+      <div id="pt-t1" class="tp">
         <div class="st">📉 แนวโน้มรายได้รวมรายปี (2565–2568)</div>
-        <div class="cfu spt"><h3>📈 รายได้รวมทุก รพ. (ล้านบาท) — ตัวเลขคือ % เปลี่ยนแปลงเทียบปีก่อน</h3><div class="cw2"><canvas id="pt-tr-total"></canvas></div></div>
+        <div class="cfu spt"><h3>📈 รายได้รวมทุก รพ. (ล้านบาท) — % เปลี่ยนแปลงเทียบปีก่อน</h3><div class="cw2"><canvas id="pt-c-total"></canvas></div></div>
         <div class="cgrid">
-          <div class="cc spt"><h3>🟢 กลุ่มสูง — รายได้รายปี</h3><div class="cw"><canvas id="pt-tr-high"></canvas></div></div>
-          <div class="cc spt"><h3>🟡 กลุ่มกลาง (1) — รายได้รายปี</h3><div class="cw"><canvas id="pt-tr-mid1"></canvas></div></div>
-          <div class="cc spt"><h3>🟡 กลุ่มกลาง (2) — รายได้รายปี</h3><div class="cw"><canvas id="pt-tr-mid2"></canvas></div></div>
-          <div class="cc spt"><h3>🔴 กลุ่มต่ำ — รายได้รายปี</h3><div class="cw"><canvas id="pt-tr-low"></canvas></div></div>
+          <div class="cc spt"><h3>🟢 กลุ่มสูง</h3><div class="cw"><canvas id="pt-c-high"></canvas></div></div>
+          <div class="cc spt"><h3>🟡 กลุ่มกลาง (1)</h3><div class="cw"><canvas id="pt-c-mid1"></canvas></div></div>
+          <div class="cc spt"><h3>🟡 กลุ่มกลาง (2)</h3><div class="cw"><canvas id="pt-c-mid2"></canvas></div></div>
+          <div class="cc spt"><h3>🔴 กลุ่มต่ำ</h3><div class="cw"><canvas id="pt-c-low"></canvas></div></div>
         </div>
-        <div class="cfu spt"><h3>📊 รายได้แต่ละ รพ. ปี 65–68 (ล้านบาท)</h3><div class="cw2"><canvas id="pt-tr-all"></canvas></div></div>
-        <div class="chg-grid" id="pt-chg"></div>
+        <div class="cfu spt"><h3>📊 รายได้แต่ละ รพ. ปี 65–68</h3><div class="cw2"><canvas id="pt-c-all"></canvas></div></div>
+        <div class="chgg" id="pt-c-chg"></div>
       </div>
-
-      <!-- TAB 2: Productivity เทียบจำนวนบุคลากร -->
-      <div id="pt-t2" class="tab-page">
+      <div id="pt-t2" class="tp">
         <div class="st">📈 Productivity เทียบจำนวนบุคลากร ปี 68</div>
-        <div class="cfu spt"><h3>🔵 Bubble Chart — แกน X: จำนวนบุคลากร | แกน Y: Productivity (ล้านบาท/คน) | ขนาด: รายได้รวม</h3><div style="position:relative;height:400px"><canvas id="pt-scatter"></canvas></div></div>
-        <div class="cfu spt"><h3>📊 รายได้ต่อบุคลากร (บาท/คน/ปี) — เรียงจากสูงไปต่ำ</h3><div class="rl" id="pt-rank"></div></div>
+        <div class="cfu spt"><h3>🔵 แกน X: จำนวนบุคลากร | แกน Y: Productivity (ล้านบาท/คน) | ขนาด bubble: รายได้รวม</h3><div style="position:relative;height:420px"><canvas id="pt-c-bubble"></canvas></div></div>
+        <div class="cfu spt"><h3>📊 รายได้ต่อบุคลากร — เรียงจากสูงไปต่ำ</h3><div class="rl" id="pt-c-rank"></div></div>
         <div class="tw"><table>
           <thead><tr><th>#</th><th>โรงพยาบาล</th><th>PT</th><th>จพ.เวช</th><th>ผู้ช่วย</th><th>นว.สธ.</th><th>รวม</th><th>ปี65</th><th>ปี66</th><th>ปี67</th><th>ปี68</th><th>Prod./คน</th><th>กลุ่ม</th><th>แนวโน้ม</th></tr></thead>
-          <tbody id="pt-tbl"></tbody>
+          <tbody id="pt-c-tbl"></tbody>
         </table></div>
       </div>
-
-      <!-- TAB 3: อัตรากำลัง -->
-      <div id="pt-t3" class="tab-page">
-        <div class="st">👥 วิเคราะห์อัตรากำลังบุคลากร</div>
-        <div class="kpi-row">
-          <div class="kpi" style="--ac:#7eb8f7"><div class="lb">นักกายภาพบำบัด</div><div class="vl">39</div><div class="sb2">68.4% ของบุคลากรทั้งหมด</div></div>
-          <div class="kpi" style="--ac:#6dd9c0"><div class="lb">จพ.เวชกรรมฟื้นฟู</div><div class="vl">1</div><div class="sb2">1.8% — มีเฉพาะบ่อพลอย</div></div>
-          <div class="kpi" style="--ac:#b39ddb"><div class="lb">ผู้ช่วยเหลือผู้ป่วย</div><div class="vl">14</div><div class="sb2">24.6% ของบุคลากร</div></div>
-          <div class="kpi" style="--ac:#ffb38a"><div class="lb">นักวิชาการ สธ.</div><div class="vl">3</div><div class="sb2">5.3% — มีเฉพาะเลาขวัญ</div></div>
+      <div id="pt-t3" class="tp">
+        <div class="st">👥 วิเคราะห์อัตรากำลัง</div>
+        <div class="krow">
+          <div class="kpi" style="--ac:#7eb8f7"><div class="lb">นักกายภาพบำบัด</div><div class="vl">39</div><div class="sb">68.4%</div></div>
+          <div class="kpi" style="--ac:#6dd9c0"><div class="lb">จพ.เวชกรรมฟื้นฟู</div><div class="vl">1</div><div class="sb">บ่อพลอย เท่านั้น</div></div>
+          <div class="kpi" style="--ac:#b39ddb"><div class="lb">ผู้ช่วยเหลือผู้ป่วย</div><div class="vl">14</div><div class="sb">24.6%</div></div>
+          <div class="kpi" style="--ac:#ffb38a"><div class="lb">นักวิชาการ สธ.</div><div class="vl">3</div><div class="sb">เลาขวัญ เท่านั้น</div></div>
         </div>
         <div class="cgrid">
-          <div class="cc spt"><h3>🧩 สัดส่วนบุคลากรตามตำแหน่ง</h3><div class="cw"><canvas id="pt-st-donut"></canvas></div></div>
-          <div class="cc spt"><h3>📊 Productivity vs จำนวนบุคลากร ปี 68</h3><div class="cw"><canvas id="pt-st-bubble"></canvas></div></div>
+          <div class="cc spt"><h3>🧩 สัดส่วนบุคลากรตามตำแหน่ง</h3><div class="cw"><canvas id="pt-c-pie"></canvas></div></div>
+          <div class="cc spt"><h3>📊 Productivity vs บุคลากร ปี 68</h3><div class="cw"><canvas id="pt-c-bub2"></canvas></div></div>
         </div>
-        <div class="st">รายละเอียดอัตรากำลังแต่ละ รพ.</div>
-        <div class="staff-grid" id="pt-staff-cards"></div>
-        <div class="ins">
-          <h3>💡 ข้อแนะนำด้านอัตรากำลัง</h3>
-          <div class="ir"><span>📌</span><span>รพ.บุคลากรมาก (6–7 คน) ควรพัฒนา Case Mix ให้ซับซ้อน เพื่อเพิ่มรายได้ต่อหัว</span></div>
-          <div class="ir"><span>📌</span><span>รพ.บุคลากรน้อย 2–3 คน แต่ productivity ต่ำ ควรวิเคราะห์ demand vs supply</span></div>
-          <div class="ir"><span>✅</span><span>บ่อพลอย Best Practice: มี PT + จพ.เวชกรรมฟื้นฟู — productivity สูงสุด</span></div>
+        <div class="st">รายละเอียดแต่ละ รพ.</div>
+        <div class="sgrid" id="pt-c-cards"></div>
+        <div class="ins"><h3>💡 ข้อแนะนำ</h3>
+          <div class="ir"><span>📌</span><span>รพ.บุคลากรมาก 6–7 คน ควรพัฒนา Case Mix ให้ซับซ้อน</span></div>
+          <div class="ir"><span>✅</span><span>บ่อพลอย Best Practice: PT + จพ.เวชกรรมฟื้นฟู productivity สูงสุด</span></div>
         </div>
       </div>
-    </div><!-- end dept pt -->
+    </div>
 
-    <!-- ══ DEPT: แผนไทย ══ -->
-    <div id="dp-thai" class="dept-page">
-
-      <!-- TAB 0: ภาพรวม -->
-      <div id="th-t0" class="tab-page active">
-        <div class="kpi-row">
-          <div class="kpi" style="--ac:#b39ddb"><div class="lb">รพ.ที่มีบริการ</div><div class="vl">14</div><div class="sb2">รวมทุก รพ.</div></div>
-          <div class="kpi" style="--ac:#a5d6a7"><div class="lb">บุคลากรรวม</div><div class="vl">77</div><div class="sb2">แพทย์ไทย+จพ.+นวก.+ผู้ช่วย</div></div>
-          <div class="kpi" style="--ac:#ffb38a"><div class="lb">รายได้รวม ปี 68</div><div class="vl">23.1M</div><div class="sb2">บาท</div></div>
-          <div class="kpi" style="--ac:#f48fb1"><div class="lb">Productivity เฉลี่ย</div><div class="vl">0.30M</div><div class="sb2">บาท/คน/ปี</div></div>
-          <div class="kpi" style="--ac:#b39ddb"><div class="lb">แพทย์แผนไทย</div><div class="vl">17</div><div class="sb2">22% ของบุคลากร</div></div>
+    <!-- THAI -->
+    <div id="dp-thai" class="dp">
+      <div id="th-t0" class="tp on">
+        <div class="krow">
+          <div class="kpi" style="--ac:#b39ddb"><div class="lb">รพ.ที่มีบริการ</div><div class="vl">14</div><div class="sb">รวมทุก รพ.</div></div>
+          <div class="kpi" style="--ac:#a5d6a7"><div class="lb">บุคลากรรวม</div><div class="vl">77</div><div class="sb">แพทย์ไทย+จพ.+นวก.+ผู้ช่วย</div></div>
+          <div class="kpi" style="--ac:#ffb38a"><div class="lb">รายได้รวม ปี 68</div><div class="vl">23.1M</div><div class="sb">บาท</div></div>
+          <div class="kpi" style="--ac:#f48fb1"><div class="lb">Productivity เฉลี่ย</div><div class="vl">0.30M</div><div class="sb">บาท/คน/ปี</div></div>
+          <div class="kpi" style="--ac:#b39ddb"><div class="lb">แพทย์แผนไทย</div><div class="vl">17</div><div class="sb">22% ของบุคลากร</div></div>
         </div>
         <div class="lr">
           <div class="li"><div class="ld" style="background:#6dd9c0"></div>สูง ≥ 0.5 ล้าน/คน/ปี</div>
@@ -275,172 +232,184 @@ body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);dis
         <div class="st">🏥 จัดกลุ่ม รพ. ตาม Productivity ปี 68</div>
         <div class="ggrid" id="th-grp"></div>
         <div class="cgrid">
-          <div class="cc sthai"><h3>🥧 สัดส่วนรายได้ ปี 68</h3><div class="cw"><canvas id="th-ov-donut"></canvas></div></div>
-          <div class="cc sthai"><h3>👥 จำนวนบุคลากรแต่ละ รพ.</h3><div class="cw"><canvas id="th-ov-staff"></canvas></div></div>
+          <div class="cc sthai"><h3>🥧 สัดส่วนรายได้ ปี 68</h3><div class="cw"><canvas id="th-c-donut"></canvas></div></div>
+          <div class="cc sthai"><h3>👥 จำนวนบุคลากรแต่ละ รพ.</h3><div class="cw"><canvas id="th-c-staff"></canvas></div></div>
         </div>
-        <div class="ins">
-          <h3>💡 ข้อสังเกตสำคัญ</h3>
+        <div class="ins"><h3>💡 ข้อสังเกต</h3>
           <div class="ir"><span>✅</span><span><b>ไทรโยค</b> รายได้พุ่งสูงสุด ปี 68 — 5.0M จากปี 65 เพียง 1.4M (+263%)</span></div>
-          <div class="ir"><span>🌟</span><span><b>สมเด็จฯ ปิยมหาราชฯ</b> เติบโตดีมาก ปี 68 รายได้ 2.4M จากปี 65 เพียง 0.27M (+796%)</span></div>
-          <div class="ir"><span>⚠️</span><span><b>สังขละบุรี</b> รายได้ตกจาก 578K (ปี66) เหลือ 175K (ปี68) — ลดลงมากที่สุด</span></div>
-          <div class="ir"><span>🔴</span><span><b>ศุกร์ศิริฯ</b> มีเฉพาะผู้ช่วย 1 คน ไม่มีแพทย์แผนไทย รายได้ตกต่อเนื่อง</span></div>
+          <div class="ir"><span>🌟</span><span><b>สมเด็จฯ ปิยมหาราชรมณียเขต</b> เติบโตดีมาก ปี 68 รายได้ 2.4M (+796%)</span></div>
+          <div class="ir"><span>⚠️</span><span><b>สังขละบุรี</b> รายได้ตกจาก 578K เหลือ 175K — ลดลงมากที่สุด</span></div>
+          <div class="ir"><span>🔴</span><span><b>ศุกร์ศิริศรีสวัสดิ์</b> มีเฉพาะผู้ช่วย 1 คน รายได้ตกต่อเนื่อง</span></div>
         </div>
       </div>
-
-      <!-- TAB 1: แนวโน้มรายได้รวมรายปี -->
-      <div id="th-t1" class="tab-page">
+      <div id="th-t1" class="tp">
         <div class="st">📉 แนวโน้มรายได้รวมรายปี (2565–2568)</div>
-        <div class="cfu sthai"><h3>📈 รายได้รวมทุก รพ. (ล้านบาท) — ตัวเลขคือ % เปลี่ยนแปลงเทียบปีก่อน</h3><div class="cw2"><canvas id="th-tr-total"></canvas></div></div>
+        <div class="cfu sthai"><h3>📈 รายได้รวมทุก รพ. (ล้านบาท) — % เปลี่ยนแปลงเทียบปีก่อน</h3><div class="cw2"><canvas id="th-c-total"></canvas></div></div>
         <div class="cgrid">
-          <div class="cc sthai"><h3>🟢 กลุ่มสูง — รายได้รายปี</h3><div class="cw"><canvas id="th-tr-high"></canvas></div></div>
-          <div class="cc sthai"><h3>🟡 กลุ่มกลาง (1) — รายได้รายปี</h3><div class="cw"><canvas id="th-tr-mid1"></canvas></div></div>
-          <div class="cc sthai"><h3>🟡 กลุ่มกลาง (2) — รายได้รายปี</h3><div class="cw"><canvas id="th-tr-mid2"></canvas></div></div>
-          <div class="cc sthai"><h3>🔴 กลุ่มต่ำ — รายได้รายปี</h3><div class="cw"><canvas id="th-tr-low"></canvas></div></div>
+          <div class="cc sthai"><h3>🟢 กลุ่มสูง</h3><div class="cw"><canvas id="th-c-high"></canvas></div></div>
+          <div class="cc sthai"><h3>🟡 กลุ่มกลาง (1)</h3><div class="cw"><canvas id="th-c-mid1"></canvas></div></div>
+          <div class="cc sthai"><h3>🟡 กลุ่มกลาง (2)</h3><div class="cw"><canvas id="th-c-mid2"></canvas></div></div>
+          <div class="cc sthai"><h3>🔴 กลุ่มต่ำ</h3><div class="cw"><canvas id="th-c-low"></canvas></div></div>
         </div>
-        <div class="cfu sthai"><h3>📊 รายได้แต่ละ รพ. ปี 65–68 (ล้านบาท)</h3><div class="cw2"><canvas id="th-tr-all"></canvas></div></div>
-        <div class="chg-grid" id="th-chg"></div>
+        <div class="cfu sthai"><h3>📊 รายได้แต่ละ รพ. ปี 65–68</h3><div class="cw2"><canvas id="th-c-all"></canvas></div></div>
+        <div class="chgg" id="th-c-chg"></div>
       </div>
-
-      <!-- TAB 2: Productivity เทียบจำนวนบุคลากร -->
-      <div id="th-t2" class="tab-page">
+      <div id="th-t2" class="tp">
         <div class="st">📈 Productivity เทียบจำนวนบุคลากร ปี 68</div>
-        <div class="cfu sthai"><h3>🔵 Bubble Chart — แกน X: จำนวนบุคลากร | แกน Y: Productivity (ล้านบาท/คน) | ขนาด: รายได้รวม</h3><div style="position:relative;height:400px"><canvas id="th-scatter"></canvas></div></div>
-        <div class="cfu sthai"><h3>📊 รายได้ต่อบุคลากร (บาท/คน/ปี) — เรียงจากสูงไปต่ำ</h3><div class="rl" id="th-rank"></div></div>
+        <div class="cfu sthai"><h3>🔵 แกน X: จำนวนบุคลากร | แกน Y: Productivity (ล้านบาท/คน) | ขนาด bubble: รายได้รวม</h3><div style="position:relative;height:420px"><canvas id="th-c-bubble"></canvas></div></div>
+        <div class="cfu sthai"><h3>📊 รายได้ต่อบุคลากร — เรียงจากสูงไปต่ำ</h3><div class="rl" id="th-c-rank"></div></div>
         <div class="tw"><table>
           <thead><tr><th>#</th><th>โรงพยาบาล</th><th>แพทย์ไทย</th><th>จพ.อายุรเวท</th><th>นวก.</th><th>ผู้ช่วย</th><th>รวม</th><th>ปี65</th><th>ปี66</th><th>ปี67</th><th>ปี68</th><th>Prod./คน</th><th>กลุ่ม</th><th>แนวโน้ม</th></tr></thead>
-          <tbody id="th-tbl"></tbody>
+          <tbody id="th-c-tbl"></tbody>
         </table></div>
       </div>
-
-      <!-- TAB 3: อัตรากำลัง -->
-      <div id="th-t3" class="tab-page">
-        <div class="st">👥 วิเคราะห์อัตรากำลังบุคลากร</div>
-        <div class="kpi-row">
-          <div class="kpi" style="--ac:#b39ddb"><div class="lb">แพทย์แผนไทย</div><div class="vl">17</div><div class="sb2">22% ของบุคลากรทั้งหมด</div></div>
-          <div class="kpi" style="--ac:#a5d6a7"><div class="lb">จพ.อายุรเวท</div><div class="vl">6</div><div class="sb2">7.8% — 4 รพ. มีตำแหน่งนี้</div></div>
-          <div class="kpi" style="--ac:#7eb8f7"><div class="lb">นักวิชาการ</div><div class="vl">2</div><div class="sb2">2.6% — มี 2 รพ.</div></div>
-          <div class="kpi" style="--ac:#ffb38a"><div class="lb">ผู้ช่วยแพทย์ไทย</div><div class="vl">52</div><div class="sb2">67.5% — สูงที่สุด</div></div>
+      <div id="th-t3" class="tp">
+        <div class="st">👥 วิเคราะห์อัตรากำลัง</div>
+        <div class="krow">
+          <div class="kpi" style="--ac:#b39ddb"><div class="lb">แพทย์แผนไทย</div><div class="vl">17</div><div class="sb">22%</div></div>
+          <div class="kpi" style="--ac:#a5d6a7"><div class="lb">จพ.อายุรเวท</div><div class="vl">6</div><div class="sb">7.8% — 4 รพ.</div></div>
+          <div class="kpi" style="--ac:#7eb8f7"><div class="lb">นักวิชาการ</div><div class="vl">2</div><div class="sb">2.6% — 2 รพ.</div></div>
+          <div class="kpi" style="--ac:#ffb38a"><div class="lb">ผู้ช่วยแพทย์ไทย</div><div class="vl">52</div><div class="sb">67.5% — สูงสุด</div></div>
         </div>
         <div class="cgrid">
-          <div class="cc sthai"><h3>🧩 สัดส่วนบุคลากรตามตำแหน่ง</h3><div class="cw"><canvas id="th-st-donut"></canvas></div></div>
-          <div class="cc sthai"><h3>📊 Productivity vs จำนวนบุคลากร ปี 68</h3><div class="cw"><canvas id="th-st-bubble"></canvas></div></div>
+          <div class="cc sthai"><h3>🧩 สัดส่วนบุคลากรตามตำแหน่ง</h3><div class="cw"><canvas id="th-c-pie"></canvas></div></div>
+          <div class="cc sthai"><h3>📊 Productivity vs บุคลากร ปี 68</h3><div class="cw"><canvas id="th-c-bub2"></canvas></div></div>
         </div>
-        <div class="st">รายละเอียดอัตรากำลังแต่ละ รพ.</div>
-        <div class="staff-grid" id="th-staff-cards"></div>
-        <div class="ins">
-          <h3>💡 ข้อแนะนำด้านอัตรากำลัง</h3>
-          <div class="ir"><span>📌</span><span>ผู้ช่วยแพทย์ไทยเป็นกำลังหลัก (58%) ควรพัฒนาทักษะเพื่อเพิ่มมูลค่าบริการ</span></div>
-          <div class="ir"><span>📌</span><span>รพ.บุคลากรมาก 13–14 คน เช่น ไทรโยค, เจ้าคุณไพบูลย์ฯ — ควรเน้น Premium service</span></div>
-          <div class="ir"><span>✅</span><span>ท่ากระดาน Best Practice: 3 คน แต่ได้รายได้ต่อคนสูง</span></div>
+        <div class="st">รายละเอียดแต่ละ รพ.</div>
+        <div class="sgrid" id="th-c-cards"></div>
+        <div class="ins"><h3>💡 ข้อแนะนำ</h3>
+          <div class="ir"><span>📌</span><span>ผู้ช่วยแพทย์ไทย 67.5% — ควรพัฒนาทักษะเพื่อเพิ่มมูลค่าบริการ</span></div>
           <div class="ir"><span>⚠️</span><span>ศุกร์ศิริฯ มีเฉพาะผู้ช่วย ควรจัดสรรแพทย์แผนไทยเพื่อขยายบริการ</span></div>
         </div>
       </div>
+    </div>
 
-    </div><!-- end dept thai -->
-  </div><!-- content -->
-</div><!-- main -->
+  </div>
+</div>
 
 <script>
-/* ═══ DATA ═══ */
-const PT=[
-  {name:'ทองผาภูมิ',        r65:5656406, r66:6728175, r67:3586655, r68:2903925, doc:4,jor:0,asst:2,nws:0,total:6},
-  {name:'สมเด็จฯ ส.๑๙',    r65:3112871, r66:6215407, r67:9195796, r68:4985237, doc:4,jor:0,asst:2,nws:0,total:6},
-  {name:'บ่อพลอย',          r65:2544270, r66:4210410, r67:5401760, r68:5683710, doc:3,jor:1,asst:0,nws:0,total:4},
-  {name:'เจ้าคุณไพบูลย์ฯ', r65:4053848, r66:5430073, r67:6656027, r68:6801572, doc:4,jor:0,asst:2,nws:0,total:6},
-  {name:'ด่านมะขามเตี้ย',  r65:5106687, r66:5588126, r67:5507549, r68:5961188, doc:3,jor:0,asst:2,nws:0,total:5},
-  {name:'ท่ากระดาน',        r65:574080,  r66:1398513, r67:1585200, r68:1563585, doc:2,jor:0,asst:0,nws:0,total:2},
-  {name:'ไทรโยค',           r65:2941940, r66:3601040, r67:4878570, r68:3984230, doc:3,jor:0,asst:1,nws:0,total:4},
-  {name:'เลาขวัญ',          r65:11227868,r66:13645163,r67:14338384,r68:9612372, doc:4,jor:0,asst:0,nws:3,total:7},
-  {name:'สถานพระบารมี',     r65:920216,  r66:1685074, r67:2981043, r68:3033866, doc:2,jor:0,asst:1,nws:0,total:3},
-  {name:'สมเด็จฯ ปิยฯ',    r65:1218086, r66:2601589, r67:2801349, r68:2688696, doc:2,jor:0,asst:1,nws:0,total:3},
-  {name:'สังขละบุรี',       r65:1045181, r66:2476372, r67:2773971, r68:2063285, doc:3,jor:0,asst:0,nws:0,total:3},
-  {name:'ห้วยกระเจาฯ',     r65:5601264, r66:7093532, r67:7456532, r68:5140910, doc:3,jor:0,asst:1,nws:0,total:4},
-  {name:'หนองปรือ',         r65:2457800, r66:3918940, r67:3051630, r68:4304810, doc:2,jor:0,asst:2,nws:0,total:4},
-];
-const THAI=[
-  // ข้อมูลจาก sheet แผนไทย (อัพเดท 6/6/68) บุคลากร = ปี 69
-  // doc=แพทย์แผนไทย, jor=จพ.อายุรเวท, nwk=นวก., asst=ผู้ช่วย
-  {name:'ทองผาภูมิ',              r65:622078,   r66:1277307,  r67:1153910,  r68:1351689,  doc:1,jor:1,nwk:0,asst:4,total:6},
-  {name:'สมเด็จฯ สังฆราช ๑๙',    r65:1581956,  r66:1788357,  r67:1382295,  r68:1312276,  doc:1,jor:0,nwk:0,asst:4,total:5},
-  {name:'บ่อพลอย',                r65:850796,   r66:1132354,  r67:1824510,  r68:3057082,  doc:2,jor:0,nwk:0,asst:6,total:8},
-  {name:'เจ้าคุณไพบูลย์พนมทวน',  r65:3158050,  r66:3733230,  r67:4293495,  r68:4314379,  doc:2,jor:1,nwk:0,asst:11,total:14},
-  {name:'ด่านมะขามเตี้ย',         r65:870038,   r66:1191679,  r67:956778,   r68:978396,   doc:1,jor:0,nwk:0,asst:3,total:4},
-  {name:'ท่ากระดาน',              r65:287172,   r66:364543,   r67:450617,   r68:505050,   doc:2,jor:0,nwk:0,asst:1,total:3},
-  {name:'ไทรโยค',                 r65:1379774,  r66:1863361,  r67:2982683,  r68:5008355,  doc:1,jor:2,nwk:0,asst:10,total:13},
-  {name:'เลาขวัญ',                r65:1034638,  r66:1095539,  r67:1224443,  r68:1259493,  doc:2,jor:0,nwk:0,asst:3,total:5},
-  {name:'สถานพระบารมี',           r65:231462,   r66:256989,   r67:590563,   r68:652554,   doc:1,jor:0,nwk:0,asst:1,total:2},
-  {name:'สมเด็จฯ ปิยมหาราชรมณียเขต', r65:269024, r66:968212, r67:1401558,  r68:2409854,  doc:1,jor:1,nwk:1,asst:3,total:6},
-  {name:'สังขละบุรี',             r65:358266,   r66:578800,   r67:464356,   r68:175575,   doc:1,jor:0,nwk:0,asst:1,total:2},
-  {name:'ห้วยกระเจาเฉลิมพระเกียรติ ๘๐ พรรษา', r65:961920, r66:1202811, r67:1347972, r68:1448670, doc:1,jor:1,nwk:1,asst:3,total:6},
-  {name:'ศุกร์ศิริศรีสวัสดิ์',   r65:1724143,  r66:1528009,  r67:1378481,  r68:882279,   doc:0,jor:0,nwk:0,asst:1,total:1},
-  {name:'หนองปรือ',               r65:192276,   r66:433621,   r67:593800,   r68:643209,   doc:1,jor:0,nwk:0,asst:1,total:2},
+/* ═══════════════════════════════════════
+   DATA
+═══════════════════════════════════════ */
+const PT = [
+  {name:'ทองผาภูมิ',        r65:5656406,  r66:6728175,  r67:3586655,  r68:2903925,  doc:4,jor:0,asst:2,nws:0,total:6},
+  {name:'สมเด็จฯ สังฆราช',  r65:3112871,  r66:6215407,  r67:9195796,  r68:4985237,  doc:4,jor:0,asst:2,nws:0,total:6},
+  {name:'บ่อพลอย',          r65:2544270,  r66:4210410,  r67:5401760,  r68:5683710,  doc:3,jor:1,asst:0,nws:0,total:4},
+  {name:'เจ้าคุณไพบูลย์ฯ', r65:4053848,  r66:5430073,  r67:6656027,  r68:6801572,  doc:4,jor:0,asst:2,nws:0,total:6},
+  {name:'ด่านมะขามเตี้ย',  r65:5106687,  r66:5588126,  r67:5507549,  r68:5961188,  doc:3,jor:0,asst:2,nws:0,total:5},
+  {name:'ท่ากระดาน',        r65:574080,   r66:1398513,  r67:1585200,  r68:1563585,  doc:2,jor:0,asst:0,nws:0,total:2},
+  {name:'ไทรโยค',           r65:2941940,  r66:3601040,  r67:4878570,  r68:3984230,  doc:3,jor:0,asst:1,nws:0,total:4},
+  {name:'เลาขวัญ',          r65:11227868, r66:13645163, r67:14338384, r68:9612372,  doc:4,jor:0,asst:0,nws:3,total:7},
+  {name:'สถานพระบารมี',     r65:920216,   r66:1685074,  r67:2981043,  r68:3033866,  doc:2,jor:0,asst:1,nws:0,total:3},
+  {name:'สมเด็จฯ ปิยฯ',    r65:1218086,  r66:2601589,  r67:2801349,  r68:2688696,  doc:2,jor:0,asst:1,nws:0,total:3},
+  {name:'สังขละบุรี',       r65:1045181,  r66:2476372,  r67:2773971,  r68:2063285,  doc:3,jor:0,asst:0,nws:0,total:3},
+  {name:'ห้วยกระเจาฯ',     r65:5601264,  r66:7093532,  r67:7456532,  r68:5140910,  doc:3,jor:0,asst:1,nws:0,total:4},
+  {name:'หนองปรือ',         r65:2457800,  r66:3918940,  r67:3051630,  r68:4304810,  doc:2,jor:0,asst:2,nws:0,total:4},
 ];
 
-/* ═══ HELPERS ═══ */
-const PAL=['#7eb8f7','#6dd9c0','#b39ddb','#ffb38a','#f48fb1','#80d8f7','#ffe082','#a5d6a7','#c5cae9','#fff59d','#ef9a9a','#ce93d8','#bcaaa4','#80cbc4'];
-// CLINE now global as CLINE_GLOBAL
-const fmtM=v=>(v/1e6).toFixed(2)+'M';
-const fmtK=v=>Math.round(v/1000).toLocaleString()+'K';
-const pct=(a,b)=>b>0?((a-b)/b*100).toFixed(1):'–';
-const gcol=g=>g==='high'?'#6dd9c0':g==='mid'?'#ffe082':'#f48fb1';
-const badge=g=>g==='high'?'<span class="badge bh">สูง</span>':g==='mid'?'<span class="badge bm">กลาง</span>':'<span class="badge bl">ต่ำ</span>';
-const trendH=(r67,r68)=>r68>r67?'<span style="color:#2e8b6e;font-weight:700">▲ เพิ่ม</span>':'<span style="color:#c0395c;font-weight:700">▼ ลด</span>';
-const baseOpts=(ycb)=>({responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{family:'Sarabun',size:11}}}},scales:{x:{ticks:{font:{family:'Sarabun',size:10}}},y:{ticks:{font:{family:'Sarabun',size:10},callback:ycb}}}});
+const THAI = [
+  {name:'ทองผาภูมิ',           r65:622078,   r66:1277307,  r67:1153910,  r68:1351689,  doc:1,jor:1,nwk:0,asst:4,total:6},
+  {name:'สมเด็จฯ สังฆราช',    r65:1581956,  r66:1788357,  r67:1382295,  r68:1312276,  doc:1,jor:0,nwk:0,asst:4,total:5},
+  {name:'บ่อพลอย',             r65:850796,   r66:1132354,  r67:1824510,  r68:3057082,  doc:2,jor:0,nwk:0,asst:6,total:8},
+  {name:'เจ้าคุณไพบูลย์ฯ',    r65:3158050,  r66:3733230,  r67:4293495,  r68:4314379,  doc:2,jor:1,nwk:0,asst:11,total:14},
+  {name:'ด่านมะขามเตี้ย',     r65:870038,   r66:1191679,  r67:956778,   r68:978396,   doc:1,jor:0,nwk:0,asst:3,total:4},
+  {name:'ท่ากระดาน',           r65:287172,   r66:364543,   r67:450617,   r68:505050,   doc:2,jor:0,nwk:0,asst:1,total:3},
+  {name:'ไทรโยค',              r65:1379774,  r66:1863361,  r67:2982683,  r68:5008355,  doc:1,jor:2,nwk:0,asst:10,total:13},
+  {name:'เลาขวัญ',             r65:1034638,  r66:1095539,  r67:1224443,  r68:1259493,  doc:2,jor:0,nwk:0,asst:3,total:5},
+  {name:'สถานพระบารมี',        r65:231462,   r66:256989,   r67:590563,   r68:652554,   doc:1,jor:0,nwk:0,asst:1,total:2},
+  {name:'สมเด็จฯ ปิยมหาราชฯ', r65:269024,   r66:968212,   r67:1401558,  r68:2409854,  doc:1,jor:1,nwk:1,asst:3,total:6},
+  {name:'สังขละบุรี',          r65:358266,   r66:578800,   r67:464356,   r68:175575,   doc:1,jor:0,nwk:0,asst:1,total:2},
+  {name:'ห้วยกระเจาฯ',        r65:961920,   r66:1202811,  r67:1347972,  r68:1448670,  doc:1,jor:1,nwk:1,asst:3,total:6},
+  {name:'ศุกร์ศิริฯ',         r65:1724143,  r66:1528009,  r67:1378481,  r68:882279,   doc:0,jor:0,nwk:0,asst:1,total:1},
+  {name:'หนองปรือ',            r65:192276,   r66:433621,   r67:593800,   r68:643209,   doc:1,jor:0,nwk:0,asst:1,total:2},
+];
 
-let _yoyCounter=0;
-function lineWithPctPlugin(totals,col){
-  /* Custom plugin to draw YoY %  — unique id per chart to avoid duplicate registration */
-  const uid='yoyLabel_'+(++_yoyCounter);
+/* ═══════════════════════════════════════
+   CONSTANTS & HELPERS
+═══════════════════════════════════════ */
+const YEARS = ['2565','2566','2567','2568'];
+const PAL   = ['#7eb8f7','#6dd9c0','#b39ddb','#ffb38a','#f48fb1','#80d8f7','#ffe082','#a5d6a7','#c5cae9','#fff59d','#ef9a9a','#ce93d8','#bcaaa4','#80cbc4'];
+const LPAL  = ['#7eb8f7','#6dd9c0','#b39ddb','#ffb38a','#f48fb1','#ffe082','#a5d6a7','#ce93d8'];
+
+const fmtM  = v => (v/1e6).toFixed(2)+'M';
+const fmtK  = v => Math.round(v/1000).toLocaleString()+'K';
+const gcol  = g => g==='high'?'#6dd9c0':g==='mid'?'#ffe082':'#f48fb1';
+const badge = g => g==='high'?'<span class="badge bh">สูง</span>':g==='mid'?'<span class="badge bm">กลาง</span>':'<span class="badge bl">ต่ำ</span>';
+const trHtml= (r67,r68) => r68>r67?'<span style="color:#2e8b6e;font-weight:700">▲ เพิ่ม</span>':'<span style="color:#c0395c;font-weight:700">▼ ลด</span>';
+
+/* ── unique counter for plugin IDs ── */
+let _uid = 0;
+const uid = () => ++_uid;
+
+/* ── YoY label plugin ── */
+function yoyPlugin(totals) {
   return {
-    id: uid,
-    afterDatasetsDraw(chart){
-      const {ctx,data,scales:{x,y}}=chart;
-      const vals=data.datasets[0].data;
+    id: 'yoy_' + uid(),
+    afterDatasetsDraw(chart) {
+      const {ctx, data, scales:{x,y}} = chart;
+      const vals = data.datasets[0].data;
       ctx.save();
-      ctx.font='bold 11px Sarabun,sans-serif';
-      ctx.textAlign='center';
-      vals.forEach((v,i)=>{
-        if(i===0) return;
-        const prev=vals[i-1];
-        const chg=((v-prev)/prev*100).toFixed(1);
-        const up=parseFloat(chg)>=0;
-        ctx.fillStyle=up?'#2e8b6e':'#c0395c';
-        const px=x.getPixelForValue(i);
-        const py=y.getPixelForValue(v)-14;
-        ctx.fillText((up?'▲+':'▼')+chg+'%', px, py);
+      ctx.font = 'bold 11px Sarabun,sans-serif';
+      ctx.textAlign = 'center';
+      vals.forEach((v,i) => {
+        if (i===0) return;
+        const prev = vals[i-1];
+        const chg  = ((v-prev)/prev*100).toFixed(1);
+        ctx.fillStyle = parseFloat(chg)>=0 ? '#2e8b6e' : '#c0395c';
+        ctx.fillText((parseFloat(chg)>=0?'▲+':'▼')+chg+'%',
+          x.getPixelForValue(i), y.getPixelForValue(v)-14);
       });
       ctx.restore();
     }
   };
 }
 
-let CURSTATE={dept:'pt',tab:0};
+/* ── bubble label plugin ── */
+function bubPlugin(bArr) {
+  return {
+    id: 'bub_' + uid(),
+    afterDatasetsDraw(chart) {
+      const {ctx, scales:{x,y}} = chart;
+      ctx.save();
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#2d3748';
+      chart.getDatasetMeta(0).data.forEach((el, i) => {
+        const b  = bArr[i];
+        const px = x.getPixelForValue(b.x);
+        const py = y.getPixelForValue(b.y);
+        const r  = b.r;
+        ctx.font = 'bold 10px Sarabun,sans-serif';
+        const name = b.name;
+        let lines = [name];
+        if (ctx.measureText(name).width > r*2+16) {
+          const m = Math.ceil(name.length/2);
+          lines = [name.slice(0,m), name.slice(m)];
+        }
+        const topY = py - r - 6 - (lines.length-1)*12;
+        lines.forEach((ln,li) => ctx.fillText(ln, px, topY+li*13));
+      });
+      ctx.restore();
+    }
+  };
+}
 
-window.addEventListener('load',()=>{
-  const gPT   = p=>p>=1200000?'high':p>=600000?'mid':'low';
-  const gThai = p=>p>=500000 ?'high':p>=200000?'mid':'low';
-  buildDept(PT,  'pt',  gPT,   {main:'#7eb8f7',dark:'#3b82f6',lt:'#b3d4f7',vlt:'#e3f0ff'});
-  buildDept(THAI,'thai',gThai, {main:'#b39ddb',dark:'#7c4dff',lt:'#d1c4e9',vlt:'#ede7f6'});
-});
-
-const CLINE_GLOBAL=['#7eb8f7','#6dd9c0','#b39ddb','#ffb38a','#f48fb1','#ffe082','#a5d6a7','#ce93d8'];
-const YEARS_GLOBAL=['2565','2566','2567','2568'];
-function _makeLineGroup(canvasId, items){
+/* ── line group chart ── */
+function lineGroup(canvasId, items) {
   const el = document.getElementById(canvasId);
-  if(!el || items.length===0) return;
+  if (!el || !items.length) return;
   new Chart(el, {
-    type:'line',
-    data:{
-      labels: YEARS_GLOBAL,
-      datasets: items.map((d,i)=>({
+    type: 'line',
+    data: {
+      labels: YEARS,
+      datasets: items.map((d,i) => ({
         label: d.name,
         data: [d.r65,d.r66,d.r67,d.r68].map(v=>+(v/1e6).toFixed(2)),
-        borderColor: CLINE_GLOBAL[i%CLINE_GLOBAL.length],
-        backgroundColor:'transparent',
-        tension:0, pointRadius:5, borderWidth:2, fill:false
+        borderColor: LPAL[i%LPAL.length],
+        backgroundColor: 'transparent',
+        tension: 0, pointRadius: 5, borderWidth: 2, fill: false
       }))
     },
-    options:{
+    options: {
       responsive:true, maintainAspectRatio:false,
       plugins:{legend:{labels:{font:{family:'Sarabun',size:10}}}},
       scales:{
@@ -451,192 +420,275 @@ function _makeLineGroup(canvasId, items){
   });
 }
 
-let _bubbleCounter=0;
-function makeBubbleLabelPlugin(bArr,idStr){
-  // unique id per chart instance to avoid Chart.js duplicate plugin error
-  const uid = idStr + '_' + (++_bubbleCounter);
-  return {
-    id: uid,
-    afterDatasetsDraw(chart){
-      const {ctx,scales:{x,y}}=chart;
-      ctx.save();
-      ctx.textAlign='center';
-      ctx.fillStyle='#2d3748';
-      chart.getDatasetMeta(0).data.forEach((el,i)=>{
-        const b=bArr[i];
-        const px=x.getPixelForValue(b.x);
-        const py=y.getPixelForValue(b.y);
-        const r=b.r;
-        ctx.font='bold 10px Sarabun,sans-serif';
-        const name=b.name;
-        let lines=[name];
-        if(ctx.measureText(name).width > r*2+20){
-          const mid=Math.ceil(name.length/2);
-          lines=[name.slice(0,mid), name.slice(mid)];
-        }
-        const topY=py-r-6-(lines.length-1)*12;
-        lines.forEach((ln,li)=>ctx.fillText(ln,px,topY+li*13));
-      });
-      ctx.restore();
-    }
-  };
-}
-
-function buildDept(DATA,pfx,groupFn,COL){
-  DATA.forEach(d=>{d.prod=d.total>0?d.r68/d.total:0; d.group=groupFn(d.prod);});
-  const sorted=[...DATA].sort((a,b)=>b.prod-a.prod);
-  const maxP=sorted[0].prod;
-  const YEARS=YEARS_GLOBAL; // use global
-
-  /* ── TAB 0 ── */
-  // Group grid
-  const gg=document.getElementById(`${pfx}-grp`);gg.innerHTML='';
-  ['high','mid','low'].forEach(g=>{
-    const items=sorted.filter(d=>d.group===g);
-    const lbl=g==='high'?'🟢 กลุ่มสูง':g==='mid'?'🟡 กลุ่มกลาง':'🔴 กลุ่มต่ำ';
-    const cls=g==='high'?'ghi':g==='mid'?'gmi':'gli';
-    const rows=items.map(d=>`<div class="gi"><div><div class="gn">${d.name}</div><div class="gmt">${d.total} คน</div><div class="pg"><div class="pf" style="width:${(d.prod/maxP*100).toFixed(0)}%;background:${gcol(g)}"></div></div></div><div class="gv">${fmtM(d.prod)}</div></div>`).join('');
-    gg.innerHTML+=`<div class="gc"><div class="gh ${cls}">${lbl}</div><div class="gb">${rows||'<div style="color:var(--sub);padding:8px 0;font-size:.82rem">ไม่มีข้อมูล</div>'}</div></div>`;
-  });
-  new Chart(document.getElementById(`${pfx}-ov-donut`),{type:'doughnut',data:{labels:DATA.map(d=>d.name),datasets:[{data:DATA.map(d=>d.r68),backgroundColor:PAL,borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{family:'Sarabun',size:10},boxWidth:10,padding:5}},tooltip:{callbacks:{label:c=>c.label+': '+fmtM(c.raw)}}}}});
-  const sDs=pfx==='pt'
-    ?[{label:'PT',data:DATA.map(d=>d.doc),backgroundColor:'#7eb8f7'},{label:'จพ.เวช',data:DATA.map(d=>d.jor),backgroundColor:'#6dd9c0'},{label:'ผู้ช่วย',data:DATA.map(d=>d.asst),backgroundColor:'#b39ddb'},{label:'นว.สธ.',data:DATA.map(d=>d.nws),backgroundColor:'#ffb38a'}]
-    :[{label:'แพทย์ไทย',data:DATA.map(d=>d.doc),backgroundColor:'#b39ddb'},{label:'จพ.อายุรเวท',data:DATA.map(d=>d.jor),backgroundColor:'#6dd9c0'},{label:'นวก.',data:DATA.map(d=>d.nwk||0),backgroundColor:'#7eb8f7'},{label:'ผู้ช่วย',data:DATA.map(d=>d.asst),backgroundColor:'#ffb38a'}];
-  new Chart(document.getElementById(`${pfx}-ov-staff`),{type:'bar',data:{labels:DATA.map(d=>d.name),datasets:sDs},options:{responsive:true,maintainAspectRatio:false,scales:{x:{stacked:true,ticks:{font:{family:'Sarabun',size:9},maxRotation:55}},y:{stacked:true,ticks:{stepSize:1,font:{family:'Sarabun'}}}},plugins:{legend:{labels:{font:{family:'Sarabun',size:10}}}}}});
-
-  /* ── TAB 1: แนวโน้ม ── */
-  const totals=YEARS.map((_,i)=>DATA.reduce((s,d)=>[d.r65,d.r66,d.r67,d.r68][i]+s,0)/1e6);
-  // Line with YoY labels
-  new Chart(document.getElementById(`${pfx}-tr-total`),{
-    type:'line',
-    data:{labels:YEARS,datasets:[{label:'รายได้รวม (ล้านบาท)',data:totals,borderColor:COL.main,backgroundColor:'transparent',tension:0,pointRadius:7,pointBackgroundColor:COL.main,borderWidth:3,fill:false}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{family:'Sarabun',size:11}}}},scales:{x:{ticks:{font:{family:'Sarabun',size:11}}},y:{ticks:{font:{family:'Sarabun'},callback:v=>v.toFixed(1)+'M'}}}},
-    plugins:[lineWithPctPlugin(totals,COL.main)]
-  });
-
-  // Group trend — mid split into 2 halves
-  const highG=DATA.filter(d=>d.group==='high');
-  const midG =DATA.filter(d=>d.group==='mid');
-  const lowG =DATA.filter(d=>d.group==='low');
-  const midH=midG.slice(0,Math.ceil(midG.length/2));
-  const midH2=midG.slice(Math.ceil(midG.length/2));
-  _makeLineGroup(`${pfx}-tr-high`,highG);
-  _makeLineGroup(`${pfx}-tr-mid1`,midH);
-  _makeLineGroup(`${pfx}-tr-mid2`,midH2);
-  _makeLineGroup(`${pfx}-tr-low`,lowG);
-
-  // All bar
-  new Chart(document.getElementById(`${pfx}-tr-all`),{type:'bar',data:{labels:DATA.map(d=>d.name),datasets:[{label:'ปี65',data:DATA.map(d=>d.r65/1e6),backgroundColor:COL.vlt},{label:'ปี66',data:DATA.map(d=>d.r66/1e6),backgroundColor:COL.lt},{label:'ปี67',data:DATA.map(d=>d.r67/1e6),backgroundColor:COL.main},{label:'ปี68',data:DATA.map(d=>d.r68/1e6),backgroundColor:COL.dark}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{ticks:{font:{family:'Sarabun',size:9},maxRotation:50}},y:{ticks:{font:{family:'Sarabun'},callback:v=>v.toFixed(1)+'M'}}},plugins:{legend:{labels:{font:{family:'Sarabun',size:10}}}}}});
-
-  // YoY change top5 up / top3 down vs prev year (67→68)
-  const changes=[...DATA].map(d=>({name:d.name,prev:d.r67,curr:d.r68,diff:d.r68-d.r67,chgPct:((d.r68-d.r67)/d.r67*100)}));
-  const ups=[...changes].filter(c=>c.diff>0).sort((a,b)=>b.chgPct-a.chgPct).slice(0,5);
-  const dns=[...changes].filter(c=>c.diff<0).sort((a,b)=>a.chgPct-b.chgPct).slice(0,3);
-  const chgEl=document.getElementById(`${pfx}-chg`);
-  chgEl.innerHTML=`
-    <div class="chg-card">
-      <div class="chg-hd up">📈 Top 5 รายได้เพิ่มขึ้นมากที่สุด (ปี 67→68)</div>
-      <div class="chg-body">${ups.map((c,i)=>`<div class="chg-row"><div class="chg-name">${i+1}. ${c.name}</div><div><div class="chg-val up">▲ +${c.chgPct.toFixed(1)}%</div><div style="font-size:.72rem;color:var(--sub)">+${fmtM(c.diff)}</div></div></div>`).join('')}</div>
-    </div>
-    <div class="chg-card">
-      <div class="chg-hd dn">📉 Top 3 รายได้ลดลงมากที่สุด (ปี 67→68)</div>
-      <div class="chg-body">${dns.map((c,i)=>`<div class="chg-row"><div class="chg-name">${i+1}. ${c.name}</div><div><div class="chg-val dn">▼ ${c.chgPct.toFixed(1)}%</div><div style="font-size:.72rem;color:var(--sub)">${fmtM(c.diff)}</div></div></div>`).join('')}</div>
-    </div>`;
-
-  /* ── TAB 2: Productivity เทียบบุคลากร ── */
-  // Bubble scatter
-  const bubbleData=DATA.map(d=>({x:d.total,y:+(d.prod/1e6).toFixed(3),r:Math.max(10,d.r68/600000),name:d.name,group:d.group,rev:d.r68}));
-  new Chart(document.getElementById(`${pfx}-scatter`),{
-    type:'bubble',
-    data:{datasets:[{
-      label:'รพ.',
-      data:bubbleData,
-      backgroundColor:bubbleData.map(b=>gcol(b.group)+'bb'),
-      borderColor:bubbleData.map(b=>gcol(b.group)),
-      borderWidth:2
-    }]},
-    options:{responsive:true,maintainAspectRatio:false,
-      layout:{padding:{top:40}},
+/* ── bubble scatter chart ── */
+function bubChart(canvasId, bArr) {
+  const el = document.getElementById(canvasId);
+  if (!el) return;
+  new Chart(el, {
+    type: 'bubble',
+    data: {
+      datasets: [{
+        label: 'รพ.',
+        data: bArr,
+        backgroundColor: bArr.map(b=>gcol(b.group)+'bb'),
+        borderColor: bArr.map(b=>gcol(b.group)),
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      layout:{padding:{top:44}},
       scales:{
-        x:{title:{display:true,text:'จำนวนบุคลากร (คน)',font:{family:'Sarabun',size:12}},ticks:{font:{family:'Sarabun'},stepSize:1},min:0},
-        y:{title:{display:true,text:'Productivity (ล้านบาท/คน)',font:{family:'Sarabun',size:12}},ticks:{font:{family:'Sarabun'},callback:v=>v.toFixed(2)+'M'},min:0}
+        x:{title:{display:true,text:'จำนวนบุคลากร (คน)',font:{family:'Sarabun',size:12}},
+           ticks:{font:{family:'Sarabun'},stepSize:1},min:0},
+        y:{title:{display:true,text:'Productivity (ล้านบาท/คน)',font:{family:'Sarabun',size:12}},
+           ticks:{font:{family:'Sarabun'},callback:v=>v.toFixed(2)+'M'},min:0}
       },
       plugins:{
         legend:{display:false},
-        tooltip:{callbacks:{label:ctx=>{const b=bubbleData[ctx.dataIndex];return[b.name,'บุคลากร: '+b.x+' คน','Productivity: '+b.y.toFixed(2)+'M/คน','รายได้รวม: '+fmtM(b.rev)];}}}
+        tooltip:{callbacks:{label:ctx=>{
+          const b=bArr[ctx.dataIndex];
+          return [b.name,'บุคลากร: '+b.x+' คน','Prod: '+b.y.toFixed(2)+'M/คน','รายได้: '+fmtM(b.rev)];
+        }}}
       }
     },
-    plugins:[makeBubbleLabelPlugin(bubbleData,'bl-'+pfx+'-sc')]
+    plugins:[bubPlugin(bArr)]
+  });
+}
+
+/* ═══════════════════════════════════════
+   BUILD DEPT  — ไม่มี nested function
+═══════════════════════════════════════ */
+function buildDept(DATA, pfx, groupFn, COL, staffPieDef, staffRowFn, staffTblFn) {
+
+  /* คำนวณ group + sort */
+  DATA.forEach(d => { d.prod = d.total>0 ? d.r68/d.total : 0; d.group = groupFn(d.prod); });
+  const sorted = [...DATA].sort((a,b) => b.prod-a.prod);
+  const maxP   = sorted[0].prod;
+
+  /* ── TAB 0: ภาพรวม ── */
+  const gg = document.getElementById(pfx+'-grp');
+  gg.innerHTML = '';
+  ['high','mid','low'].forEach(g => {
+    const items = sorted.filter(d=>d.group===g);
+    const lbl = g==='high'?'🟢 กลุ่มสูง':g==='mid'?'🟡 กลุ่มกลาง':'🔴 กลุ่มต่ำ';
+    const cls = g==='high'?'ghi':g==='mid'?'gmi':'gli';
+    const rows = items.map(d => `
+      <div class="gi">
+        <div>
+          <div class="gn">${d.name}</div>
+          <div class="gmt">${d.total} คน</div>
+          <div class="pg"><div class="pf" style="width:${(d.prod/maxP*100).toFixed(0)}%;background:${gcol(g)}"></div></div>
+        </div>
+        <div class="gv">${fmtM(d.prod)}</div>
+      </div>`).join('');
+    gg.innerHTML += `<div class="gc"><div class="gh ${cls}">${lbl}</div><div class="gb">${rows||'<div style="color:var(--sub);padding:8px 0;font-size:.82rem">ไม่มีข้อมูล</div>'}</div></div>`;
   });
 
-  // Rank bars
-  const rl=document.getElementById(`${pfx}-rank`);rl.innerHTML='';
-  sorted.forEach(d=>{
-    const pct2=(d.prod/maxP*100).toFixed(0);
-    rl.innerHTML+=`<div class="rr"><div class="rlb">${d.name}</div><div class="rbw"><div class="rb" style="width:${pct2}%;background:${gcol(d.group)}"><span>${fmtM(d.prod)}/คน</span></div></div><div class="rv">${badge(d.group)}</div></div>`;
+  new Chart(document.getElementById(pfx+'-c-donut'), {
+    type:'doughnut',
+    data:{labels:DATA.map(d=>d.name),datasets:[{data:DATA.map(d=>d.r68),backgroundColor:PAL,borderWidth:2,borderColor:'#fff'}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'right',labels:{font:{family:'Sarabun',size:10},boxWidth:10,padding:5}},
+               tooltip:{callbacks:{label:c=>c.label+': '+fmtM(c.raw)}}}}
   });
-  const tb=document.getElementById(`${pfx}-tbl`);tb.innerHTML='';
-  sorted.forEach((d,i)=>{
-    const cols=pfx==='pt'?`<td>${d.doc}</td><td>${d.jor}</td><td>${d.asst}</td><td>${d.nws}</td>`:`<td>${d.doc}</td><td>${d.jor}</td><td>${d.nwk||0}</td><td>${d.asst}</td>`;
-    tb.innerHTML+=`<tr><td><b>${i+1}</b></td><td><b>${d.name}</b></td>${cols}<td><b>${d.total}</b></td><td>${fmtM(d.r65)}</td><td>${fmtM(d.r66)}</td><td>${fmtM(d.r67)}</td><td>${fmtM(d.r68)}</td><td><b>${fmtK(d.prod)} บ.</b></td><td>${badge(d.group)}</td><td>${trendH(d.r67,d.r68)}</td></tr>`;
+
+  new Chart(document.getElementById(pfx+'-c-staff'), {
+    type:'bar',
+    data:{labels:DATA.map(d=>d.name),datasets:staffPieDef.barDs(DATA)},
+    options:{responsive:true,maintainAspectRatio:false,
+      scales:{x:{stacked:true,ticks:{font:{family:'Sarabun',size:9},maxRotation:55}},
+              y:{stacked:true,ticks:{stepSize:1,font:{family:'Sarabun'}}}},
+      plugins:{legend:{labels:{font:{family:'Sarabun',size:10}}}}}
+  });
+
+  /* ── TAB 1: แนวโน้ม ── */
+  const totals = YEARS.map((_,i) => DATA.reduce((s,d)=>[d.r65,d.r66,d.r67,d.r68][i]+s, 0)/1e6);
+  new Chart(document.getElementById(pfx+'-c-total'), {
+    type:'line',
+    data:{labels:YEARS,datasets:[{
+      label:'รายได้รวม (ล้านบาท)',data:totals,
+      borderColor:COL.main,backgroundColor:'transparent',
+      tension:0,pointRadius:7,pointBackgroundColor:COL.main,borderWidth:3,fill:false
+    }]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{labels:{font:{family:'Sarabun',size:11}}}},
+      scales:{x:{ticks:{font:{family:'Sarabun',size:11}}},
+              y:{ticks:{font:{family:'Sarabun'},callback:v=>v.toFixed(1)+'M'}}}},
+    plugins:[yoyPlugin(totals)]
+  });
+
+  const highG = DATA.filter(d=>d.group==='high');
+  const midG  = DATA.filter(d=>d.group==='mid');
+  const lowG  = DATA.filter(d=>d.group==='low');
+  const mid1  = midG.slice(0, Math.ceil(midG.length/2));
+  const mid2  = midG.slice(Math.ceil(midG.length/2));
+  lineGroup(pfx+'-c-high', highG);
+  lineGroup(pfx+'-c-mid1', mid1);
+  lineGroup(pfx+'-c-mid2', mid2);
+  lineGroup(pfx+'-c-low',  lowG);
+
+  new Chart(document.getElementById(pfx+'-c-all'), {
+    type:'bar',
+    data:{labels:DATA.map(d=>d.name),datasets:[
+      {label:'ปี65',data:DATA.map(d=>d.r65/1e6),backgroundColor:COL.vlt},
+      {label:'ปี66',data:DATA.map(d=>d.r66/1e6),backgroundColor:COL.lt},
+      {label:'ปี67',data:DATA.map(d=>d.r67/1e6),backgroundColor:COL.main},
+      {label:'ปี68',data:DATA.map(d=>d.r68/1e6),backgroundColor:COL.dark},
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      scales:{x:{ticks:{font:{family:'Sarabun',size:9},maxRotation:50}},
+              y:{ticks:{font:{family:'Sarabun'},callback:v=>v.toFixed(1)+'M'}}},
+      plugins:{legend:{labels:{font:{family:'Sarabun',size:10}}}}}
+  });
+
+  const chgs = [...DATA].map(d=>({name:d.name,diff:d.r68-d.r67,pct:((d.r68-d.r67)/d.r67*100)}));
+  const ups  = chgs.filter(c=>c.diff>0).sort((a,b)=>b.pct-a.pct).slice(0,5);
+  const dns  = chgs.filter(c=>c.diff<0).sort((a,b)=>a.pct-b.pct).slice(0,3);
+  document.getElementById(pfx+'-c-chg').innerHTML =
+    `<div class="chgc"><div class="chgh up">📈 Top 5 รายได้เพิ่มมากที่สุด (ปี 67→68)</div>
+      <div class="chgb">${ups.map((c,i)=>`<div class="chgr"><div class="chgn">${i+1}. ${c.name}</div>
+        <div><div class="cuv">▲ +${c.pct.toFixed(1)}%</div><div style="font-size:.7rem;color:var(--sub)">+${fmtM(c.diff)}</div></div></div>`).join('')}</div></div>
+     <div class="chgc"><div class="chgh dn">📉 Top 3 รายได้ลดมากที่สุด (ปี 67→68)</div>
+      <div class="chgb">${dns.map((c,i)=>`<div class="chgr"><div class="chgn">${i+1}. ${c.name}</div>
+        <div><div class="cdv">▼ ${c.pct.toFixed(1)}%</div><div style="font-size:.7rem;color:var(--sub)">${fmtM(c.diff)}</div></div></div>`).join('')}</div></div>`;
+
+  /* ── TAB 2: Productivity เทียบบุคลากร ── */
+  const bArr = DATA.map(d=>({x:d.total,y:+(d.prod/1e6).toFixed(3),r:Math.max(10,d.r68/600000),name:d.name,group:d.group,rev:d.r68}));
+  bubChart(pfx+'-c-bubble', bArr);
+
+  const rl = document.getElementById(pfx+'-c-rank');
+  rl.innerHTML = '';
+  sorted.forEach(d => {
+    const p = (d.prod/maxP*100).toFixed(0);
+    rl.innerHTML += `<div class="rr">
+      <div class="rlb">${d.name}</div>
+      <div class="rbw"><div class="rb" style="width:${p}%;background:${gcol(d.group)}"><span>${fmtM(d.prod)}/คน</span></div></div>
+      <div class="rv">${badge(d.group)}</div>
+    </div>`;
+  });
+
+  const tb = document.getElementById(pfx+'-c-tbl');
+  tb.innerHTML = '';
+  sorted.forEach((d,i) => {
+    tb.innerHTML += `<tr>
+      <td><b>${i+1}</b></td><td><b>${d.name}</b></td>
+      ${staffTblFn(d)}
+      <td><b>${d.total}</b></td>
+      <td>${fmtM(d.r65)}</td><td>${fmtM(d.r66)}</td><td>${fmtM(d.r67)}</td><td>${fmtM(d.r68)}</td>
+      <td><b>${fmtK(d.prod)} บ.</b></td><td>${badge(d.group)}</td><td>${trHtml(d.r67,d.r68)}</td>
+    </tr>`;
   });
 
   /* ── TAB 3: อัตรากำลัง ── */
-  const staffTots=pfx==='pt'
-    ?[{label:'นักกายภาพบำบัด',val:39,col:'#7eb8f7'},{label:'จพ.เวชกรรมฟื้นฟู',val:1,col:'#6dd9c0'},{label:'ผู้ช่วยเหลือผู้ป่วย',val:14,col:'#b39ddb'},{label:'นว.สาธารณสุข',val:3,col:'#ffb38a'}]
-    :[{label:'แพทย์แผนไทย',val:17,col:'#b39ddb'},{label:'จพ.อายุรเวท',val:6,col:'#6dd9c0'},{label:'นักวิชาการ',val:2,col:'#7eb8f7'},{label:'ผู้ช่วยแพทย์ไทย',val:52,col:'#ffb38a'}];
-  new Chart(document.getElementById(`${pfx}-st-donut`),{type:'doughnut',data:{labels:staffTots.map(s=>s.label+' ('+s.val+')'),datasets:[{data:staffTots.map(s=>s.val),backgroundColor:staffTots.map(s=>s.col),borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{family:'Sarabun',size:11}}}}}});
-
-  // Bubble staff vs prod (tab3 version — same style)
-  const bData2=sorted.map(d=>({x:d.total,y:+(d.prod/1e6).toFixed(3),r:Math.max(10,d.r68/600000),name:d.name,group:d.group,rev:d.r68}));
-  new Chart(document.getElementById(`${pfx}-st-bubble`),{
-    type:'bubble',
-    data:{datasets:[{label:'รพ.',data:bData2,backgroundColor:bData2.map(b=>gcol(b.group)+'bb'),borderColor:bData2.map(b=>gcol(b.group)),borderWidth:2}]},
+  new Chart(document.getElementById(pfx+'-c-pie'), {
+    type:'doughnut',
+    data:{labels:staffPieDef.labels,datasets:[{data:staffPieDef.vals,backgroundColor:staffPieDef.cols,borderWidth:2,borderColor:'#fff'}]},
     options:{responsive:true,maintainAspectRatio:false,
-      layout:{padding:{top:40}},
-      scales:{
-        x:{title:{display:true,text:'บุคลากร (คน)',font:{family:'Sarabun',size:11}},ticks:{font:{family:'Sarabun'},stepSize:1},min:0},
-        y:{title:{display:true,text:'Prod. (ล้านบาท/คน)',font:{family:'Sarabun',size:11}},ticks:{font:{family:'Sarabun'},callback:v=>v.toFixed(2)+'M'},min:0}
-      },
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>{const b=bData2[ctx.dataIndex];return[b.name,'บุคลากร: '+b.x+' คน','Prod: '+b.y.toFixed(2)+'M/คน'];}}}}
-    },
-    plugins:[makeBubbleLabelPlugin(bData2,'bl-'+pfx+'-st')]
+      plugins:{legend:{position:'right',labels:{font:{family:'Sarabun',size:11}}}}}
   });
 
-  // Staff cards
-  const sc=document.getElementById(`${pfx}-staff-cards`);sc.innerHTML='';
-  sorted.forEach(d=>{
-    const rows=pfx==='pt'
-      ?`<div class="srow"><div class="sl">นักกายภาพบำบัด</div><div class="sv">${d.doc} คน</div></div><div class="srow"><div class="sl">จพ.เวชกรรมฟื้นฟู</div><div class="sv">${d.jor} คน</div></div><div class="srow"><div class="sl">ผู้ช่วยเหลือผู้ป่วย</div><div class="sv">${d.asst} คน</div></div><div class="srow"><div class="sl">นว.สาธารณสุข</div><div class="sv">${d.nws} คน</div></div>`
-      :`<div class="srow"><div class="sl">แพทย์แผนไทย</div><div class="sv">${d.doc} คน</div></div><div class="srow"><div class="sl">จพ.อายุรเวท</div><div class="sv">${d.jor} คน</div></div><div class="srow"><div class="sl">นักวิชาการ</div><div class="sv">${d.nwk||0} คน</div></div><div class="srow"><div class="sl">ผู้ช่วย</div><div class="sv">${d.asst} คน</div></div>`;
-    sc.innerHTML+=`<div class="staff-card" style="--ac:${gcol(d.group)}"><div class="sc-name">${badge(d.group)} ${d.name}</div>${rows}<div class="srow" style="margin-top:5px;border-top:1px solid #f0f4fb;padding-top:5px"><div class="sl">รวมบุคลากร</div><div class="sv">${d.total} คน</div></div><div class="srow"><div class="sl">Productivity/คน</div><div class="sv" style="color:${gcol(d.group)}">${fmtK(d.prod)} บ.</div></div></div>`;
+  const bArr2 = sorted.map(d=>({x:d.total,y:+(d.prod/1e6).toFixed(3),r:Math.max(10,d.r68/600000),name:d.name,group:d.group,rev:d.r68}));
+  bubChart(pfx+'-c-bub2', bArr2);
+
+  const cards = document.getElementById(pfx+'-c-cards');
+  cards.innerHTML = '';
+  sorted.forEach(d => {
+    cards.innerHTML += `<div class="sc" style="--ac:${gcol(d.group)}">
+      <div class="scn">${badge(d.group)} ${d.name}</div>
+      ${staffRowFn(d)}
+      <div class="sr" style="margin-top:5px;border-top:1px solid #f0f4fb;padding-top:5px">
+        <div class="sl">รวม</div><div class="sv">${d.total} คน</div></div>
+      <div class="sr"><div class="sl">Productivity/คน</div>
+        <div class="sv" style="color:${gcol(d.group)}">${fmtK(d.prod)} บ.</div></div>
+    </div>`;
   });
 }
 
-/* ═══ NAV ═══ */
-function switchDept(dept){
-  CURSTATE={dept,tab:0};
-  document.getElementById('sbpt').className   ='dept-btn'+(dept==='pt'  ?' apt':'');
-  document.getElementById('sbthai').className ='dept-btn'+(dept==='thai'?' athai':'');
-  document.getElementById('dp-pt').classList.toggle('active',dept==='pt');
-  document.getElementById('dp-thai').classList.toggle('active',dept==='thai');
-  document.querySelectorAll('.tab-page').forEach(p=>p.classList.remove('active'));
-  document.getElementById(`${dept==='pt'?'pt':'th'}-t0`).classList.add('active');
-  updateTabBtns(dept);
-  document.getElementById('topTitle').textContent=dept==='pt'?'🦴 กายภาพบำบัด — Productivity Dashboard':'🌿 แพทย์แผนไทย — Productivity Dashboard';
-  document.getElementById('topSub').textContent=dept==='pt'?'วิเคราะห์รายได้เทียบบุคลากร · 13 โรงพยาบาล จ.กาญจนบุรี':'วิเคราะห์รายได้เทียบบุคลากร · 14 โรงพยาบาล จ.กาญจนบุรี';
+/* ═══════════════════════════════════════
+   DEPT CONFIG  (แยก config ออกจาก buildDept)
+═══════════════════════════════════════ */
+const PT_CFG = {
+  groupFn: p => p>=1200000?'high':p>=600000?'mid':'low',
+  COL: {main:'#7eb8f7',dark:'#3b82f6',lt:'#b3d4f7',vlt:'#e3f0ff'},
+  staffPieDef: {
+    labels:['นักกายภาพบำบัด (39)','จพ.เวชกรรมฟื้นฟู (1)','ผู้ช่วยเหลือผู้ป่วย (14)','นว.สาธารณสุข (3)'],
+    vals:[39,1,14,3], cols:['#7eb8f7','#6dd9c0','#b39ddb','#ffb38a'],
+    barDs: DATA => [
+      {label:'PT',     data:DATA.map(d=>d.doc), backgroundColor:'#7eb8f7'},
+      {label:'จพ.เวช',data:DATA.map(d=>d.jor), backgroundColor:'#6dd9c0'},
+      {label:'ผู้ช่วย',data:DATA.map(d=>d.asst),backgroundColor:'#b39ddb'},
+      {label:'นว.สธ.',data:DATA.map(d=>d.nws), backgroundColor:'#ffb38a'},
+    ]
+  },
+  staffRowFn: d => `
+    <div class="sr"><div class="sl">นักกายภาพบำบัด</div><div class="sv">${d.doc} คน</div></div>
+    <div class="sr"><div class="sl">จพ.เวชกรรมฟื้นฟู</div><div class="sv">${d.jor} คน</div></div>
+    <div class="sr"><div class="sl">ผู้ช่วยเหลือผู้ป่วย</div><div class="sv">${d.asst} คน</div></div>
+    <div class="sr"><div class="sl">นว.สาธารณสุข</div><div class="sv">${d.nws} คน</div></div>`,
+  staffTblFn: d => `<td>${d.doc}</td><td>${d.jor}</td><td>${d.asst}</td><td>${d.nws}</td>`,
+};
+
+const THAI_CFG = {
+  groupFn: p => p>=500000?'high':p>=200000?'mid':'low',
+  COL: {main:'#b39ddb',dark:'#7c4dff',lt:'#d1c4e9',vlt:'#ede7f6'},
+  staffPieDef: {
+    labels:['แพทย์แผนไทย (17)','จพ.อายุรเวท (6)','นักวิชาการ (2)','ผู้ช่วยแพทย์ไทย (52)'],
+    vals:[17,6,2,52], cols:['#b39ddb','#6dd9c0','#7eb8f7','#ffb38a'],
+    barDs: DATA => [
+      {label:'แพทย์ไทย',   data:DATA.map(d=>d.doc),     backgroundColor:'#b39ddb'},
+      {label:'จพ.อายุรเวท',data:DATA.map(d=>d.jor),     backgroundColor:'#6dd9c0'},
+      {label:'นวก.',       data:DATA.map(d=>d.nwk||0),  backgroundColor:'#7eb8f7'},
+      {label:'ผู้ช่วย',    data:DATA.map(d=>d.asst),    backgroundColor:'#ffb38a'},
+    ]
+  },
+  staffRowFn: d => `
+    <div class="sr"><div class="sl">แพทย์แผนไทย</div><div class="sv">${d.doc} คน</div></div>
+    <div class="sr"><div class="sl">จพ.อายุรเวท</div><div class="sv">${d.jor} คน</div></div>
+    <div class="sr"><div class="sl">นักวิชาการ</div><div class="sv">${d.nwk||0} คน</div></div>
+    <div class="sr"><div class="sl">ผู้ช่วย</div><div class="sv">${d.asst} คน</div></div>`,
+  staffTblFn: d => `<td>${d.doc}</td><td>${d.jor}</td><td>${d.nwk||0}</td><td>${d.asst}</td>`,
+};
+
+/* ═══════════════════════════════════════
+   INIT
+═══════════════════════════════════════ */
+window.addEventListener('load', () => {
+  buildDept(PT,   'pt',   PT_CFG.groupFn,   PT_CFG.COL,   PT_CFG.staffPieDef,   PT_CFG.staffRowFn,   PT_CFG.staffTblFn);
+  buildDept(THAI, 'th',   THAI_CFG.groupFn, THAI_CFG.COL, THAI_CFG.staffPieDef, THAI_CFG.staffRowFn, THAI_CFG.staffTblFn);
+});
+
+/* ═══════════════════════════════════════
+   NAV
+═══════════════════════════════════════ */
+let STATE = {dept:'pt', tab:0};
+
+function switchDept(dept) {
+  STATE = {dept, tab:0};
+  document.getElementById('sbpt').className   = 'dept-btn'+(dept==='pt'?' apt':'');
+  document.getElementById('sbthai').className = 'dept-btn'+(dept==='thai'?' athai':'');
+  document.getElementById('dp-pt').classList.toggle('on', dept==='pt');
+  document.getElementById('dp-thai').classList.toggle('on', dept==='thai');
+  document.querySelectorAll('.tp').forEach(p=>p.classList.remove('on'));
+  const pfx = dept==='pt'?'pt':'th';
+  document.getElementById(pfx+'-t0').classList.add('on');
+  updateTabs(dept);
+  document.getElementById('ttl').textContent  = dept==='pt' ? '🦴 กายภาพบำบัด — Productivity Dashboard' : '🌿 แพทย์แผนไทย — Productivity Dashboard';
+  document.getElementById('tsub').textContent = dept==='pt' ? 'วิเคราะห์รายได้เทียบบุคลากร · 13 โรงพยาบาล จ.กาญจนบุรี' : 'วิเคราะห์รายได้เทียบบุคลากร · 14 โรงพยาบาล จ.กาญจนบุรี';
 }
-function switchTab(idx){
-  CURSTATE.tab=idx;
-  const pfx=CURSTATE.dept==='pt'?'pt':'th';
-  for(let i=0;i<4;i++) document.getElementById(`${pfx}-t${i}`).classList.remove('active');
-  document.getElementById(`${pfx}-t${idx}`).classList.add('active');
-  updateTabBtns(CURSTATE.dept);
+
+function switchTab(idx) {
+  STATE.tab = idx;
+  const pfx = STATE.dept==='pt'?'pt':'th';
+  for(let i=0;i<4;i++) document.getElementById(pfx+'-t'+i).classList.remove('on');
+  document.getElementById(pfx+'-t'+idx).classList.add('on');
+  updateTabs(STATE.dept);
 }
-function updateTabBtns(dept){
-  const cls=dept==='pt'?'apt-a':'athai-a';
-  for(let i=0;i<4;i++){
-    document.getElementById(`t${i}`).className='tab-btn'+(i===CURSTATE.tab?' '+cls:'');
+
+function updateTabs(dept) {
+  const cls = dept==='pt'?'apt':'athai';
+  for(let i=0;i<4;i++) {
+    document.getElementById('t'+i).className = 'tbtn'+(i===STATE.tab?' '+cls:'');
   }
 }
 </script>
